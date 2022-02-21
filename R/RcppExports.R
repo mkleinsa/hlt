@@ -9,7 +9,7 @@ abs2 <- function(x) {
     .Call(`_hlt_abs2`, x)
 }
 
-lt <- function(x, z, iter, burn, arate, post, ix, ixe, npar, n, nB, J, nD, nT, tJ, accept, eps) {
-    .Call(`_hlt_lt`, x, z, iter, burn, arate, post, ix, ixe, npar, n, nB, J, nD, nT, tJ, accept, eps)
+lt <- function(x, z, iter, burn, arate, post, ix, ixe, npar, n, nB, J, nD, nT, tJ, accept, eps, display_progress = TRUE) {
+    .Call(`_hlt_lt`, x, z, iter, burn, arate, post, ix, ixe, npar, n, nB, J, nD, nT, tJ, accept, eps, display_progress)
 }
 

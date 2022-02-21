@@ -1,7 +1,7 @@
 [
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt.cpp",
-        "file_last_write": 1645454071.0,
+        "file_last_write": 1645479403.0,
         "definitions": [
             {
                 "usr": "c:@F@lgp#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#d#d#S4_#S4_#d#d#d#d#d#d#",
@@ -22,10 +22,10 @@
                 "column": 8
             },
             {
-                "usr": "c:@F@lt#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#I#S4_#&S4_#d#",
+                "usr": "c:@F@lt#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#I#S4_#&S4_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lt(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, int, Rcpp::NumericVector, Rcpp::NumericVector &, double)",
+                "name": "lt(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, int, Rcpp::NumericVector, Rcpp::NumericVector &, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt.cpp",
                 "line": 109,
                 "column": 8

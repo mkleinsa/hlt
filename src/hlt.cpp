@@ -2,6 +2,9 @@
 #include <RcppDist.h>
 using namespace Rcpp;
 // [[Rcpp::depends(Rcpp, RcppDist)]]
+// [[Rcpp::depends(RcppProgress)]]
+#include <progress.hpp>
+#include <progress_bar.hpp>
 
 // [[Rcpp::export]]
 double lgp(IntegerMatrix & x,
@@ -122,21 +125,28 @@ double lt(IntegerMatrix & x,
           int nT,
           NumericVector tJ,
           NumericVector & accept,
-          double eps) {
+          double eps,
+          bool display_progress = true) {
+  
+  Progress p(iter, display_progress);
+  
+  NumericVector oldpars = post(0, _ );
 
   for(int it = 1; it < iter; it++) {
-    NumericVector oldpars = post(it - 1, _ );
     NumericVector prop = Rcpp::rnorm(npar, 0.0, arate);
     NumericVector newpars = oldpars + prop;
 
     for(int q = ix(0); q < ixe(0); q ++){
       oldpars(q) = abs2(oldpars(q));
+      newpars(q) = abs2(newpars(q));
     }
     for(int q = ix(4); q < ixe(4); q ++){
       oldpars(q) = abs2(oldpars(q));
+      newpars(q) = abs2(newpars(q));
     }
     for(int q = ix(5); q < ixe(5); q ++){
       oldpars(q) = abs2(oldpars(q));
+      newpars(q) = abs2(newpars(q));
     }
 
     double numer = lgp(x,
@@ -177,12 +187,19 @@ double lt(IntegerMatrix & x,
     double acceptit = (acceptp > R::runif(0.0, 1.0));
     
     if(acceptit == true) {
-      post(it, _ ) = newpars;
+      oldpars = newpars;
+      if(it > burn) {
+        post(it - burn, _ ) = newpars;
+      }
       accept[it] = 1;
     } else {
-      post(it, _ ) = post(it - 1, _ );
+      if(it > burn) {
+        post(it - burn, _ ) = oldpars;
+      }
       accept[it] = 0;
     }
+    
+    p.increment();
   }
   
   return 1.0;

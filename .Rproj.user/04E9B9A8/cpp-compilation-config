@@ -8,6 +8,7 @@
         "-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
         "-I/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/Rcpp/include",
         "-I/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppDist/include",
+        "-I/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppProgress/include",
         "-std=gnu++14",
         "-I/Library/Frameworks/R.framework/Resources/include",
         "-DNDEBUG",
@@ -19,6 +20,6 @@
     ],
     "pch": "Rcpp",
     "is_cpp": true,
-    "hash": "16443345531645148473",
-    "compiler": "7668556428067003684"
+    "hash": "16443345531645480259",
+    "compiler": "13938181649170627849"
 }

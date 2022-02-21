@@ -24,6 +24,7 @@
 #' @param iter number of total iterations.
 #' @param burn number of burn in iterations.
 #' @param arate acceptance rate for Metropolis-Hanstings algorithm.
+#' @param progress boolean, show progress bar? Defaults to TRUE.
 #'
 #'
 #' @return A matrix of posterior estimates. Rows are the draws and columns
@@ -68,8 +69,8 @@
 #' lm(xdat$theta[,4] ~ xdat$z)
 #' xdat$s.beta
 #' x = xdat$x
-#' mod = hlt(x, z = z, id = id, iter = 1000, arate = 0.05)
-#' mod = hlt(x, z = z, id = id, iter = 200000, burn = 150000, arate = 0.02)
+#' mod = hlt(x, z = z, id = id, iter = 1e3, arate = 0.005)
+#' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, arate = 0.002)
 #' mod$accept.rate
 #' post = mod$post
 #' apply(post, 2, mean)
@@ -98,7 +99,8 @@
 #' plot(mod, "mud")
 #' plot(mod, "d2")
 #' plot(mod, "beta1")
-hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate) {
+hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate,
+               progress = TRUE) {
   
     if(!is.matrix(x)) {
       x = as.matrix(x)
@@ -142,7 +144,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate) {
                      paste0("a", 1:J),
                      paste0("beta", 1:nB))
       
-      post = matrix(nrow = iter, ncol = npar)
+      post = matrix(nrow = iter - burn, ncol = npar)
       post[1, ] = c(runif((nT - 1), 0, 1.9),
                     rep(rnorm(n, 0, 1), nT),
                     rep(rnorm(J, 0.2, 1), each = (dL - 1)), 
@@ -161,7 +163,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate) {
                      "sigsqd", 
                      paste0("a", 1:J))
       
-      post = matrix(nrow = iter, ncol = npar)
+      post = matrix(nrow = iter - burn, ncol = npar)
       post[1, ] = c(runif((nT - 1), -0.8, 0.8),
                     rep(rnorm(n, 0, 1), nT),
                     rep(rnorm(J, 0.2, 1), each = (dL - 1)), 
@@ -196,7 +198,8 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate) {
          nT = nT,
          tJ = id,
          accept = accept,
-         eps = .Machine$double.eps)
+         eps = .Machine$double.eps,
+         display_progress = progress)
       
     } else {
       
@@ -214,7 +217,8 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate) {
          nT = nT,
          tJ = id,
          accept = accept,
-         eps = .Machine$double.eps)
+         eps = .Machine$double.eps,
+         display_progress = progress)
       
     }
     
@@ -223,11 +227,10 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate) {
     
     accept.rate = mean(accept)
     
-    post = post[(burn + 1):iter, ]
-    
     result = list(
       post = post, accept = accept, accept.rate = accept.rate
     )
+    
     class(result) = c("hltObj")
     
     return(result)
