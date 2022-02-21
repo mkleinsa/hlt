@@ -1,0 +1,16 @@
+Package: hlt
+Type: Package
+Title: Higher-Order Item Response Theory
+Version: 1.1.1
+Date: 2022-02-17
+Author: Michael Kleinsasser
+Maintainer: Michael Kleinsasser <mjkleinsa@gmail.com>
+Description: Higher-order latent trait theory in the context of item response
+    theory. We implement the generalized partial creadit model with a 
+    second-order latent trait structure. Latent regression can be done on the 
+    second-order latent trait.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.8), RcppDist, Rlab, ggplot2, truncnorm,
+    mvc
+LinkingTo: Rcpp, RcppDist
+RoxygenNote: 7.1.2
