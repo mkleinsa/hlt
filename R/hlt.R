@@ -70,8 +70,8 @@
 #' lm(xdat$theta[,4] ~ xdat$z)
 #' xdat$s.beta
 #' x = xdat$x
-#' mod = hlt(x, z = z, id = id, iter = 1e3, delta = 0.05)
-#' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.01)
+#' mod = hlt(x, z = z, id = id, iter = 1e5, delta = 0.017)
+#' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.017)
 #' mod$accept.rate
 #' post = mod$post
 #' apply(post, 2, mean)
@@ -79,6 +79,7 @@
 #' smy = function(x) {c(mean = mean(x), se = sd(x), quantile(x, probs = c(0.025, 0.5, 0.7, 0.975)))}
 #' apply(post[, "beta1", drop = FALSE], 2, smy)
 #' 
+#' summary(mod, param = "all")
 #' summary(mod, param = "beta")
 #' summary(mod, param = "lambda")
 #' summary(mod, param = "alpha")

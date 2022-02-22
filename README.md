@@ -6,20 +6,9 @@
 [![R-CMD-check](https://github.com/stan-dev/rstanarm/workflows/R-CMD-check/badge.svg)](https://github.com/stan-dev/rstanarm/actions)
 <!-- badges: end -->
 
-### Flexible Item Response Theory (IRT) for Complex Survey Design
+### Higher-Order Item Response Theory (Latent Trait Theory) with Regression
 
-This is an R package for estimation of item response theory models (IRT) when
-the user needs (1) flexable specifiaction of univariate and multivariate (in a variety of forms) IRT models
-for (2) dichotemous and polytonomous items responses using a wide array of likelihoods,
-and/or (3) complex survey desing adjustments (cluster, strata, and weights).
-
-The package was designed with a simple user interface in mind for the applied researcher. 
-It is flexible enough to accomodate any IRT model with univariate and multivariate latent
-trait structures. If the survey sampling accounted for the population of interest, the 
-user can do population level inference by accounting for complex survey design. If
-you are interesting in a convenient interface for fitting flexible multivariate item 
-response theory models without complex survey adjustments, then this is also the package
-for you.
+R package for estimation of higher-order latent trait theory in the context of item response theory. We implement the generalized partial creadit measurent model with a second-order latent trait structure. Latent regression can be done on the second-order latent trait.
 
 Click the arrows for more details:
 
@@ -53,52 +42,35 @@ Hi again
 
 ### Resources
 
-* [mc-stan.org/rstanarm](https://mc-stan.org/rstanarm) (online documentation, vignettes)
-* [Ask a question](https://discourse.mc-stan.org) (Stan Forums on Discourse)
-* [Open an issue](https://github.com/stan-dev/rstanarm/issues) (GitHub issues for bug reports, feature requests)
+* [Learn about MCMC](https://m-clark.github.io/docs/ld_mcmc/index_onepage.html#preface) (MCMC book)
+* [Ask a question/ Open an issue](https://github.com/mkleinsa/hlt/issues) (GitHub issues for bug reports, feature requests)
 
 ### Installation
 
 #### Latest Release
 
-The most recent **rstanarm** release can be installed from CRAN via
+The most recent **hlt** release can be installed from CRAN via
 
 ```r
-install.packages("rstanarm")
+install.packages("hlt")
 ```
 
 #### Development Version
 
-To install from GitHub, first make sure that you can install the **rstan**
-package and C++ toolchain by following these
-[instructions](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started).
-Once **rstan** is successfully installed, you can install **rstanarm** from
-GitHub using the **remotes** package by executing the following in R:
+The most recent **hlt** development release can be installed from Github via devtools. If you do not have devtools installed on your system, go here to install it.
 
 ```r
-Sys.setenv(MAKEFLAGS = "-j4") # change 4 to however many cores you can/want to use to parallelize install 
-Sys.setenv("R_REMOTES_NO_ERRORS_FROM_WARNINGS" = "true")
-remotes::install_github("stan-dev/rstanarm", INSTALL_opts = "--no-multiarch", force = TRUE)
+install.packages("devtools")
 ```
 
-You can switch `build_vignettes` to `TRUE` but it takes a lot longer to install and the 
-vignettes are already separately available from the 
-[Stan website](http://mc-stan.org/rstanarm/articles/index.html) 
-and 
-[CRAN](https://cran.r-project.org/package=rstanarm/vignettes). 
-If installation fails, please let us know by [filing an issue](https://github.com/stan-dev/rstanarm/issues).
-
-#### Survival Analysis Version
-
-The `feature/survival` branch on GitHub contains a development version of **rstanarm** that includes survival analysis functionality (via the `stan_surv` modelling function). Until this functionality is available in the CRAN release of **rstanarm**, users who wish to use the survival analysis functionality can install a binary version of the survival branch of **rstanarm** from the Stan R packages repository with:
-
+```r
+devtools::install_github("mkleinsa/hlt")
 ```
-install.packages("rstanarm", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
-```
-
-Note that this binary is static (i.e. it is not automatically updated) and is only hosted so that users can access the (experimental) survival analysis functionality without needing to go through the time consuming (and sometimes painful) task of installing the development version of **rstanarm** from source.
-
 ### Contributing 
 
-If you are interested in contributing to the development of **rstanarm** please 
-see the [developer notes](http://mc-stan.org/rstanarm/dev-notes/index.html) page.
+If you are interested in contributing to the development of **hlt** please open an issue to request.
+
+### References and other literature
+
+
+

@@ -84,8 +84,8 @@ apply(xdat$x, 2, table)
 lm(xdat$theta[,4] ~ xdat$z)
 xdat$s.beta
 x = xdat$x
-mod = hlt(x, z = z, id = id, iter = 1e3, delta = 0.05)
-mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.01)
+mod = hlt(x, z = z, id = id, iter = 1e5, delta = 0.017)
+mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.017)
 mod$accept.rate
 post = mod$post
 apply(post, 2, mean)

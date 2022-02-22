@@ -78,8 +78,9 @@ double lgp(IntegerMatrix & x,
 
   for(int l = 0; l < nT - 1; l++) {
     double lambdal = lambda(l);
-    llk = llk + std::log(R::dunif(lambdal, lambdal_prior_min, lambdal_prior_max, 
-                                  false) + eps);
+    // llk = llk + std::log(R::dunif(lambdal, lambdal_prior_min, lambdal_prior_max,
+    //                               false) + eps);
+    llk = llk + std::log(d_truncnorm(lambdal, 0.0, 2.0, 0.0, 1000.0) + eps);
   }
 
   for(int j = 0; j < J; j++) {
