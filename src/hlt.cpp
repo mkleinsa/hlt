@@ -113,7 +113,7 @@ double lt(IntegerMatrix & x,
           NumericMatrix & z,
           int iter,
           int burn,
-          double arate,
+          double delta,
           NumericMatrix & post,
           NumericVector ix,
           NumericVector ixe,
@@ -133,18 +133,18 @@ double lt(IntegerMatrix & x,
   NumericVector oldpars = post(0, _ );
 
   for(int it = 1; it < iter; it++) {
-    NumericVector prop = Rcpp::rnorm(npar, 0.0, arate);
+    NumericVector prop = Rcpp::rnorm(npar, 0.0, delta);
     NumericVector newpars = oldpars + prop;
 
-    for(int q = ix(0); q < ixe(0); q ++){
+    for(int q = ix(0) - 1; q < ixe(0); q ++){
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));
     }
-    for(int q = ix(4); q < ixe(4); q ++){
+    for(int q = ix(4) - 1; q < ixe(4); q ++){
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));
     }
-    for(int q = ix(5); q < ixe(5); q ++){
+    for(int q = ix(5) - 1; q < ixe(5); q ++){
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));
     }

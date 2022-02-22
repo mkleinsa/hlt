@@ -53,8 +53,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt
-double lt(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double arate, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nD, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP arateSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nD, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -62,7 +62,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
     Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
     Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
-    Rcpp::traits::input_parameter< double >::type arate(arateSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
     Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
@@ -76,7 +76,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt(x, z, iter, burn, arate, post, ix, ixe, npar, n, nB, J, nD, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nD, nT, tJ, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }

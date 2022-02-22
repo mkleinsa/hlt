@@ -23,7 +23,8 @@
 #' like c(0,0,0,0,0,1,1,1,1,1,2,2,2,2,2).
 #' @param iter number of total iterations.
 #' @param burn number of burn in iterations.
-#' @param arate acceptance rate for Metropolis-Hanstings algorithm.
+#' @param delta tuning parameter for Metropolis-Hanstings algorithm. Alter 
+#' delta until acceptance.ratio =~ 0.234.
 #' @param progress boolean, show progress bar? Defaults to TRUE.
 #'
 #'
@@ -43,7 +44,7 @@
 #' xdat = hltsim(n = 100, ntheta = ntheta, lambda = lambda, 
 #'               tJ = id, dL = dL, mua = 1, mud = 1.4, siga = 0.8, sigd = 1)
 #' x = xdat$x
-#' mod = hlt(x, ntheta = 3, id = id, iter = 1000, arate = 0.03)
+#' mod = hlt(x, ntheta = 3, id = id, iter = 1000, delta = 0.03)
 #' mod$accept.rate
 #' post = mod$post
 #' 
@@ -53,7 +54,7 @@
 #'               tJ = id, dL = dL, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
 #'               beta = 1)
 #' x = xdat$x
-#' mod = hlt(x, ntheta = 3, id = id, iter = 40000, burn = 30000, arate = 0.05)
+#' mod = hlt(x, ntheta = 3, id = id, iter = 40000, burn = 30000, delta = 0.05)
 #' mod$accept.rate
 #' post = mod$post
 #' 
@@ -69,8 +70,8 @@
 #' lm(xdat$theta[,4] ~ xdat$z)
 #' xdat$s.beta
 #' x = xdat$x
-#' mod = hlt(x, z = z, id = id, iter = 1e3, arate = 0.005)
-#' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, arate = 0.002)
+#' mod = hlt(x, z = z, id = id, iter = 1e3, delta = 0.05)
+#' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.01)
 #' mod$accept.rate
 #' post = mod$post
 #' apply(post, 2, mean)
@@ -99,7 +100,7 @@
 #' plot(mod, "mud")
 #' plot(mod, "d2")
 #' plot(mod, "beta1")
-hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate,
+hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
                progress = TRUE) {
   
     if(!is.matrix(x)) {
@@ -186,7 +187,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate,
          z = z,
          iter = iter,
          burn = burn,
-         arate = arate,
+         delta = delta,
          post = post,
          ix = ix,
          ixe = ixe,
@@ -200,13 +201,13 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, arate,
          accept = accept,
          eps = .Machine$double.eps,
          display_progress = progress)
-      
+    
     } else {
       
       lt(x = x,
          iter = iter,
          burn = burn,
-         arate = arate,
+         delta = delta,
          post = post,
          ix = ix,
          ixe = ixe,

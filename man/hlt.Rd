@@ -4,7 +4,7 @@
 \alias{hlt}
 \title{Higher-Order Item Response Theory (Latent Trait Theory) with Regression}
 \usage{
-hlt(x, z = NULL, id, iter, burn = iter/2, arate)
+hlt(x, z = NULL, id, iter, burn = iter/2, delta, progress = TRUE)
 }
 \arguments{
 \item{x}{matrix of item responses. Responses must be integers where the 
@@ -30,7 +30,10 @@ like c(0,0,0,0,0,1,1,1,1,1,2,2,2,2,2).}
 
 \item{burn}{number of burn in iterations.}
 
-\item{arate}{acceptance rate for Metropolis-Hanstings algorithm.}
+\item{delta}{tuning parameter for Metropolis-Hanstings algorithm. Alter 
+delta until acceptance.ratio =~ 0.234.}
+
+\item{progress}{boolean, show progress bar? Defaults to TRUE.}
 }
 \value{
 A matrix of posterior estimates. Rows are the draws and columns
@@ -55,7 +58,7 @@ set.seed(7794)
 xdat = hltsim(n = 100, ntheta = ntheta, lambda = lambda, 
               tJ = id, dL = dL, mua = 1, mud = 1.4, siga = 0.8, sigd = 1)
 x = xdat$x
-mod = hlt(x, ntheta = 3, id = id, iter = 1000, arate = 0.03)
+mod = hlt(x, ntheta = 3, id = id, iter = 1000, delta = 0.03)
 mod$accept.rate
 post = mod$post
 
@@ -65,7 +68,7 @@ xdat = hltsim(n = 150, ntheta = ntheta, lambda = lambda,
               tJ = id, dL = dL, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
               beta = 1)
 x = xdat$x
-mod = hlt(x, ntheta = 3, id = id, iter = 40000, burn = 30000, arate = 0.05)
+mod = hlt(x, ntheta = 3, id = id, iter = 40000, burn = 30000, delta = 0.05)
 mod$accept.rate
 post = mod$post
 
@@ -81,8 +84,8 @@ apply(xdat$x, 2, table)
 lm(xdat$theta[,4] ~ xdat$z)
 xdat$s.beta
 x = xdat$x
-mod = hlt(x, z = z, id = id, iter = 1000, arate = 0.05)
-mod = hlt(x, z = z, id = id, iter = 200000, burn = 150000, arate = 0.02)
+mod = hlt(x, z = z, id = id, iter = 1e3, delta = 0.05)
+mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.01)
 mod$accept.rate
 post = mod$post
 apply(post, 2, mean)
