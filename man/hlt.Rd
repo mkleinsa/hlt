@@ -10,7 +10,7 @@ hlt(x, z = NULL, id, iter, burn = iter/2, delta, progress = TRUE)
 \item{x}{matrix of item responses. Responses must be integers where the 
 lowest value is 0 and the highest value is the maximum possible response
 for the item with no gaps. If a question is asked with 5 possible responses,
-then the possible values should be c(0,1,2,3,4,5). For binary items, use
+then the possible values should be c(0,1,2,3,4). For binary items, use
 c(0,1).}
 
 \item{z}{centered numeric matrix of predictors for the latent regression. 
@@ -93,6 +93,7 @@ apply(post, 2, mean)
 smy = function(x) {c(mean = mean(x), se = sd(x), quantile(x, probs = c(0.025, 0.5, 0.7, 0.975)))}
 apply(post[, "beta1", drop = FALSE], 2, smy)
 
+summary(mod, param = "all")
 summary(mod, param = "beta")
 summary(mod, param = "lambda")
 summary(mod, param = "alpha")

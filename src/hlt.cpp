@@ -80,7 +80,7 @@ double lgp(IntegerMatrix & x,
     double lambdal = lambda(l);
     // llk = llk + std::log(R::dunif(lambdal, lambdal_prior_min, lambdal_prior_max,
     //                               false) + eps);
-    llk = llk + std::log(d_truncnorm(lambdal, 0.0, 2.0, 0.0, 1000.0) + eps);
+    llk = llk + std::log(d_truncnorm(lambdal, 0.0, 1.0, 0.0, 1000.0) + eps);
   }
 
   for(int j = 0; j < J; j++) {
@@ -152,36 +152,36 @@ double lt(IntegerMatrix & x,
 
     double numer = lgp(x,
                        z,
-                       newpars[Range(ix(0), ixe(0))],
+                       newpars[Range(ix(0) - 1, ixe(0) - 1)],
                        nB,
                        nT,
                        n,
                        J,
                        tJ,
                        nD,
-                       newpars[Range(ix(1), ixe(1))],
-                       newpars[Range(ix(2), ixe(2))],
-                       newpars[Range(ix(3), ixe(3))][0],
-                       newpars[Range(ix(4), ixe(4))][0],
-                       newpars[Range(ix(5), ixe(5))],
-                       newpars[Range(ix(6), ixe(6))],
+                       newpars[Range(ix(1) - 1, ixe(1) - 1)],
+                       newpars[Range(ix(2) - 1, ixe(2) - 1)],
+                       newpars[Range(ix(3) - 1, ixe(3) - 1)][0],
+                       newpars[Range(ix(4) - 1, ixe(4) - 1)][0],
+                       newpars[Range(ix(5) - 1, ixe(5) - 1)],
+                       newpars[Range(ix(6) - 1, ixe(6) - 1)],
                        eps);
 
     double denom = lgp(x,
                        z,
-                       oldpars[Range(ix(0), ixe(0))],
+                       oldpars[Range(ix(0) - 1, ixe(0) - 1)],
                        nB,
                        nT,
                        n,
                        J,
                        tJ,
                        nD,
-                       oldpars[Range(ix(1), ixe(1))],
-                       oldpars[Range(ix(2), ixe(2))],
-                       oldpars[Range(ix(3), ixe(3))][0],
-                       oldpars[Range(ix(4), ixe(4))][0],
-                       oldpars[Range(ix(5), ixe(5))],
-                       newpars[Range(ix(6), ixe(6))],
+                       oldpars[Range(ix(1) - 1, ixe(1) - 1)],
+                       oldpars[Range(ix(2) - 1, ixe(2) - 1)],
+                       oldpars[Range(ix(3) - 1, ixe(3) - 1)][0],
+                       oldpars[Range(ix(4) - 1, ixe(4) - 1)][0],
+                       oldpars[Range(ix(5) - 1, ixe(5) - 1)],
+                       newpars[Range(ix(6) - 1, ixe(6) - 1)],
                        eps);
 
     double acceptp = std::exp(numer - denom);
@@ -189,12 +189,12 @@ double lt(IntegerMatrix & x,
     
     if(acceptit == true) {
       oldpars = newpars;
-      if(it > burn) {
+      if(it >= burn) {
         post(it - burn, _ ) = newpars;
       }
       accept[it] = 1;
     } else {
-      if(it > burn) {
+      if(it >= burn) {
         post(it - burn, _ ) = oldpars;
       }
       accept[it] = 0;

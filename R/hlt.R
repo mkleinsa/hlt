@@ -8,7 +8,7 @@
 #' @param x matrix of item responses. Responses must be integers where the 
 #' lowest value is 0 and the highest value is the maximum possible response
 #' for the item with no gaps. If a question is asked with 5 possible responses,
-#' then the possible values should be c(0,1,2,3,4,5). For binary items, use
+#' then the possible values should be c(0,1,2,3,4). For binary items, use
 #' c(0,1).
 #' @param z centered numeric matrix of predictors for the latent regression. 
 #' Default is `z = NULL` so that no regression is performed. All columns
