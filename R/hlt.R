@@ -70,6 +70,9 @@
 #' lm(xdat$theta[,4] ~ xdat$z)
 #' xdat$s.beta
 #' x = xdat$x
+#' x[,1] = ifelse(x[,1] == 3, 2, x[,1])
+#' x[,4] = ifelse(x[,4] == 3, 2, x[,4])
+#' x[,5] = ifelse(x[,5] == 3, 2, x[,5])
 #' mod = hlt(x, z = z, id = id, iter = 1e5, delta = 0.017)
 #' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.017)
 #' mod$accept.rate
@@ -128,19 +131,19 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
     n = nrow(x)
     nT = ntheta + 1
     J = ncol(x)
-    dL = nrow(unique(apply(x, 2, table)))
-    nD = dL - 1
+    lJ = apply(x, 2, function(x) {length(unique(x))})
+    nD = max(lJ) - 1
     
     if(!is.null(z)) {
       if(!is.matrix(z)) {
         z = as.matrix(z)
       }
       nB = ncol(z)
-      npar = n*nT + (nT - 1) + J + J*(dL - 1) + nB + 2
+      npar = n*nT + (nT - 1) + J + sum(lJ - 1) + nB + 2
       
       post_names = c(paste0("lambda", 1:(nT - 1)),
                      as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                     rep(paste0("d", 1:J), each = (dL - 1)),
+                     rep(paste0("d", 1:sum(lJ - 1))),
                      "mud", 
                      "sigsqd", 
                      paste0("a", 1:J),
@@ -149,7 +152,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
       post = matrix(nrow = iter - burn, ncol = npar)
       post[1, ] = c(runif((nT - 1), 0, 1.9),
                     rep(rnorm(n, 0, 1), nT),
-                    rep(rnorm(J, 0.2, 1), each = (dL - 1)), 
+                    rep(rnorm(sum(lJ - 1), 0.2, 1)), 
                     runif(1, 1, 1.4), 
                     runif(1, 0.1, 1.4), 
                     runif(J, 0.5, 1),
@@ -197,6 +200,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
          nB = nB,
          J = J,
          nD = nD,
+         lJ = lJ,
          nT = nT,
          tJ = id,
          accept = accept,

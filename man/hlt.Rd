@@ -84,6 +84,9 @@ apply(xdat$x, 2, table)
 lm(xdat$theta[,4] ~ xdat$z)
 xdat$s.beta
 x = xdat$x
+x[,1] = ifelse(x[,1] == 3, 2, x[,1])
+x[,4] = ifelse(x[,4] == 3, 2, x[,4])
+x[,5] = ifelse(x[,5] == 3, 2, x[,5])
 mod = hlt(x, z = z, id = id, iter = 1e5, delta = 0.017)
 mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.017)
 mod$accept.rate

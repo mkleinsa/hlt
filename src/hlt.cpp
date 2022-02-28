@@ -15,7 +15,8 @@ double lgp(IntegerMatrix & x,
            int n,
            int J,
            NumericVector tJ,
-           int nD,
+           int nDmax,
+           NumericVector lJ,
            NumericVector theta,
            NumericVector d,
            double mud,
@@ -30,21 +31,27 @@ double lgp(IntegerMatrix & x,
            double lambdal_prior_max = 2.0) {
 
   double llk = 0;
-
-  d.attr("dim") = Dimension(nD, J);
+  Rcout << "here"<< std::endl;
+  Rcout << "d "<< d.length() << std::endl;
+  d.attr("dim") = Dimension(nDmax, J);
   NumericMatrix dne = as<NumericMatrix>(d);
 
   theta.attr("dim") = Dimension(n, nT);
   NumericMatrix theta_mat = as<NumericMatrix>(theta);
 
-  NumericMatrix d2(nD + 1, J);
-  for(int i = 1; i <= nD; i++) {
+  NumericMatrix d2(nDmax + 1, J);
+  for(int i = 1; i <= nDmax; i++) {
     for(int j = 0; j < J; j++) {
-      d2(i, j) = dne(i - 1, j);
-      double dt = d2(i, j);
-      llk = llk + std::log(R::dnorm((dt - mud) / sigd, 0.0, 1.0, false) + eps);
+      Rcout << "here"<< std::endl;
+      if(i <= lJ(j)) {
+        d2(i, j) = dne(i - 1, j);
+        double dt = d2(i, j);
+        llk = llk + std::log(R::dnorm((dt - mud) / sigd, 0.0, 1.0, false) + eps);
+      }
     }
   }
+  
+  Rcout << "d2" << d2 << std::endl;
   
   for(int i = 0; i < n; i++) {
     for(int j = 0; j < J; j++) {
@@ -122,7 +129,8 @@ double lt(IntegerMatrix & x,
           int n,
           int nB,
           int J,
-          int nD,
+          int nDmax,
+          NumericVector lJ,
           int nT,
           NumericVector tJ,
           NumericVector & accept,
@@ -158,7 +166,8 @@ double lt(IntegerMatrix & x,
                        n,
                        J,
                        tJ,
-                       nD,
+                       nDmax,
+                       lJ,
                        newpars[Range(ix(1) - 1, ixe(1) - 1)],
                        newpars[Range(ix(2) - 1, ixe(2) - 1)],
                        newpars[Range(ix(3) - 1, ixe(3) - 1)][0],
@@ -175,7 +184,8 @@ double lt(IntegerMatrix & x,
                        n,
                        J,
                        tJ,
-                       nD,
+                       nDmax,
+                       lJ,
                        oldpars[Range(ix(1) - 1, ixe(1) - 1)],
                        oldpars[Range(ix(2) - 1, ixe(2) - 1)],
                        oldpars[Range(ix(3) - 1, ixe(3) - 1)][0],
