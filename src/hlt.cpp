@@ -31,27 +31,22 @@ double lgp(IntegerMatrix & x,
            double lambdal_prior_max = 2.0) {
 
   double llk = 0;
-  Rcout << "here"<< std::endl;
-  Rcout << "d "<< d.length() << std::endl;
   d.attr("dim") = Dimension(nDmax, J);
   NumericMatrix dne = as<NumericMatrix>(d);
 
   theta.attr("dim") = Dimension(n, nT);
   NumericMatrix theta_mat = as<NumericMatrix>(theta);
-
   NumericMatrix d2(nDmax + 1, J);
   for(int i = 1; i <= nDmax; i++) {
     for(int j = 0; j < J; j++) {
-      Rcout << "here"<< std::endl;
       if(i <= lJ(j)) {
         d2(i, j) = dne(i - 1, j);
         double dt = d2(i, j);
-        llk = llk + std::log(R::dnorm((dt - mud) / sigd, 0.0, 1.0, false) + eps);
+        //llk = llk + std::log(R::dnorm((dt - mud) / sigd, 0.0, 1.0, false) + eps);
+        llk = llk + std::log(R::dnorm(dt, 0.0, 10.0, false) + eps);
       }
     }
   }
-  
-  Rcout << "d2" << d2 << std::endl;
   
   for(int i = 0; i < n; i++) {
     for(int j = 0; j < J; j++) {
@@ -87,7 +82,8 @@ double lgp(IntegerMatrix & x,
     double lambdal = lambda(l);
     // llk = llk + std::log(R::dunif(lambdal, lambdal_prior_min, lambdal_prior_max,
     //                               false) + eps);
-    llk = llk + std::log(d_truncnorm(lambdal, 0.0, 1.0, 0.0, 1000.0) + eps);
+    //llk = llk + std::log(d_truncnorm(lambdal, 0.0, 1.0, 0.0, 1000.0) + eps);
+    llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
   }
 
   for(int j = 0; j < J; j++) {
@@ -100,8 +96,9 @@ double lgp(IntegerMatrix & x,
     llk = llk + std::log(R::dnorm(betaz, 0.0, 10.0, false) + eps);
   }
   
-  llk = llk + std::log(R::dnorm(mud, mud_prior_mean, mud_prior_stdev, false) + eps);
-  llk = llk + std::log(R::dunif(sigd, 0.0, sigd_prior_max, false) + eps);
+  //llk = llk + std::log(R::dnorm(mud, mud_prior_mean, mud_prior_stdev, false) + eps);
+  //llk = llk + std::log(R::dunif(sigd, 0.0, sigd_prior_max, false) + eps);
+  //llk = llk + std::log(R::dgamma(sigd, 0.001, 1 / 0.001, false) + eps);
 
   return llk;
 }
@@ -145,10 +142,10 @@ double lt(IntegerMatrix & x,
     NumericVector prop = Rcpp::rnorm(npar, 0.0, delta);
     NumericVector newpars = oldpars + prop;
 
-    for(int q = ix(0) - 1; q < ixe(0); q ++){
-      oldpars(q) = abs2(oldpars(q));
-      newpars(q) = abs2(newpars(q));
-    }
+    // for(int q = ix(0) - 1; q < ixe(0); q ++){
+    //   oldpars(q) = abs2(oldpars(q));
+    //   newpars(q) = abs2(newpars(q));
+    // }
     for(int q = ix(4) - 1; q < ixe(4); q ++){
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));
@@ -157,6 +154,30 @@ double lt(IntegerMatrix & x,
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));
     }
+    
+    // NumericVector beta_old = oldpars[Range(ix(6) - 1, ixe(6) - 1)];
+    // NumericVector beta_new = clone(beta_old);
+    // int lb = beta_old.length();
+    // int lthetag = (ixe(1) - ix(1)) / nT;
+    // NumericVector thetag_old = oldpars[Range(ix(1) - 1 + lthetag - (lthetag / nT), ixe(1) - 1 + lthetag)];
+    // 
+    // double tau = 1.0 / 10.0;
+    // for(int q = 0; q < lb; q++) {
+    //   NumericVector zj = z( _ , q);
+    //   NumericVector res = clone(thetag_old);
+    //   NumericVector beta_nq = clone(beta_old);
+    //   beta_nq[q] = 0.0;
+    //   double sum_part = 0.0;
+    //   double var_part = 0.0;
+    //   for(int i = 0; i < lthetag; i++) {
+    //     NumericVector zi = z( i , _ );
+    //     double resid = sum(beta_nq * zi);
+    //     double ziq = zi(q);
+    //     sum_part = sum_part + (thetag_old(i) - resid) * ziq;
+    //     var_part = var_part + (ziq * ziq);
+    //   }
+    //   beta_new(q) = R::rnorm(sum_part / (tau + var_part), std::sqrt(1.0 / (tau + var_part)));
+    // }
 
     double numer = lgp(x,
                        z,
@@ -191,7 +212,7 @@ double lt(IntegerMatrix & x,
                        oldpars[Range(ix(3) - 1, ixe(3) - 1)][0],
                        oldpars[Range(ix(4) - 1, ixe(4) - 1)][0],
                        oldpars[Range(ix(5) - 1, ixe(5) - 1)],
-                       newpars[Range(ix(6) - 1, ixe(6) - 1)],
+                       oldpars[Range(ix(6) - 1, ixe(6) - 1)],
                        eps);
 
     double acceptp = std::exp(numer - denom);

@@ -71,10 +71,13 @@
 #' xdat$s.beta
 #' x = xdat$x
 #' x[,1] = ifelse(x[,1] == 3, 2, x[,1])
+#' x[,1] = ifelse(x[,1] == 2, 1, x[,1])
 #' x[,4] = ifelse(x[,4] == 3, 2, x[,4])
 #' x[,5] = ifelse(x[,5] == 3, 2, x[,5])
 #' mod = hlt(x, z = z, id = id, iter = 1e5, delta = 0.017)
 #' mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.017)
+#' 
+#' mod = hlt(x, z = z, id = id, iter = 2.2e6, burn = 2e6, delta = 0.013)
 #' mod$accept.rate
 #' post = mod$post
 #' apply(post, 2, mean)
@@ -92,7 +95,13 @@
 #' summary(mod, param = "theta", dimension = 3)
 #' summary(mod, param = "theta", dimension = 4)
 #' 
+#' cor(as.vector(xdat$s.delta[-1,]), 
+#'     as.vector(matrix(summary(mod, param = "delta")[1,], nrow = 3)))
+#'     
+#' cor(summary(mod, param = "alpha")[1,], xdat$s.alpha)
+#' 
 #' summary(mod, param = "cor.theta", cor.theta = c(1,2))
+#' xdat$s.lam.cor
 #' 
 #' th = summary(mod, param = "theta", dimension = 1)
 #' cor(th, xdat$theta[,1])
@@ -104,6 +113,17 @@
 #' plot(mod, "mud")
 #' plot(mod, "d2")
 #' plot(mod, "beta1")
+#' 
+#' # example 
+#' data("asti")
+#' x = as.matrix(asti[, 1:25]) - 1
+#' z = asti[, 26:27]
+#' z[, 1] = (z[, 1] == "students") * 1
+#' z[, 2] = (z[, 2] == "male") * 1
+#' z = as.matrix(z)
+#' id = c(0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4)
+#' mod = hlt(x, z = z, id = id, iter = 2.2e6, burn = 2e6, delta = 0.013)
+#' 
 hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
                progress = TRUE) {
   
@@ -139,11 +159,11 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
         z = as.matrix(z)
       }
       nB = ncol(z)
-      npar = n*nT + (nT - 1) + J + sum(lJ - 1) + nB + 2
+      npar = n*nT + (nT - 1) + J + nD*J + nB + 2
       
       post_names = c(paste0("lambda", 1:(nT - 1)),
                      as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                     rep(paste0("d", 1:sum(lJ - 1))),
+                     rep(paste0("d", 1:(nD*J))),
                      "mud", 
                      "sigsqd", 
                      paste0("a", 1:J),
@@ -152,7 +172,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
       post = matrix(nrow = iter - burn, ncol = npar)
       post[1, ] = c(runif((nT - 1), 0, 1.9),
                     rep(rnorm(n, 0, 1), nT),
-                    rep(rnorm(sum(lJ - 1), 0.2, 1)), 
+                    rep(rnorm(nD*J, 0.2, 1)), 
                     runif(1, 1, 1.4), 
                     runif(1, 0.1, 1.4), 
                     runif(J, 0.5, 1),
@@ -199,7 +219,7 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
          n = n,
          nB = nB,
          J = J,
-         nD = nD,
+         nDmax = nD,
          lJ = lJ,
          nT = nT,
          tJ = id,
@@ -226,6 +246,18 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
          eps = .Machine$double.eps,
          display_progress = progress)
       
+    }
+    
+    d_end = cumsum(rep(nD, J))
+    d_start = d_end - nD + 1
+    d_00 = max(lJ - 1) - (lJ - 1)
+    d_null = d_end[d_00 > 0] + ix[3]
+    d_null_start = d_null - d_00[d_00 > 0]
+    d_null = d_null - 1
+    if(length(d_null) > 0) {
+      for(j in 1:length(d_null)) {
+        post[, d_null_start[j]:d_null[j]] <- 0
+      }
     }
     
     colnames(x) = paste0("x", 1:J)

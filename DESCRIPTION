@@ -1,8 +1,8 @@
 Package: hlt
 Type: Package
 Title: Higher-Order Item Response Theory
-Version: 1.1.1
-Date: 2022-02-17
+Version: 1.2.1
+Date: 2022-03-15
 Author: Michael Kleinsasser
 Maintainer: Michael Kleinsasser <mjkleinsa@gmail.com>
 Description: Higher-order latent trait theory in the context of item response

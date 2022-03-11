@@ -85,10 +85,13 @@ lm(xdat$theta[,4] ~ xdat$z)
 xdat$s.beta
 x = xdat$x
 x[,1] = ifelse(x[,1] == 3, 2, x[,1])
+x[,1] = ifelse(x[,1] == 2, 1, x[,1])
 x[,4] = ifelse(x[,4] == 3, 2, x[,4])
 x[,5] = ifelse(x[,5] == 3, 2, x[,5])
 mod = hlt(x, z = z, id = id, iter = 1e5, delta = 0.017)
 mod = hlt(x, z = z, id = id, iter = 1e6, burn = 9e5, delta = 0.017)
+
+mod = hlt(x, z = z, id = id, iter = 2.2e6, burn = 2e6, delta = 0.013)
 mod$accept.rate
 post = mod$post
 apply(post, 2, mean)
@@ -106,7 +109,13 @@ summary(mod, param = "theta", dimension = 2)
 summary(mod, param = "theta", dimension = 3)
 summary(mod, param = "theta", dimension = 4)
 
+cor(as.vector(xdat$s.delta[-1,]), 
+    as.vector(matrix(summary(mod, param = "delta")[1,], nrow = 3)))
+    
+cor(summary(mod, param = "alpha")[1,], xdat$s.alpha)
+
 summary(mod, param = "cor.theta", cor.theta = c(1,2))
+xdat$s.lam.cor
 
 th = summary(mod, param = "theta", dimension = 1)
 cor(th, xdat$theta[,1])
@@ -118,4 +127,15 @@ plot(mod, "a1")
 plot(mod, "mud")
 plot(mod, "d2")
 plot(mod, "beta1")
+
+# example 
+data("asti")
+x = as.matrix(asti[, 1:25]) - 1
+z = asti[, 26:27]
+z[, 1] = (z[, 1] == "students") * 1
+z[, 2] = (z[, 2] == "male") * 1
+z = as.matrix(z)
+id = c(0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4)
+mod = hlt(x, z = z, id = id, iter = 2.2e6, burn = 2e6, delta = 0.013)
+
 }
