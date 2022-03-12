@@ -23,12 +23,7 @@ double lgp(IntegerMatrix & x,
            double sigd,
            NumericVector a,
            NumericVector beta,
-           double eps,
-           double mud_prior_mean = 0.0,
-           double mud_prior_stdev = 10.0,
-           double sigd_prior_max = 2.0,
-           double lambdal_prior_min = 0.0,
-           double lambdal_prior_max = 2.0) {
+           double eps) {
 
   double llk = 0;
   d.attr("dim") = Dimension(nDmax, J);
@@ -42,7 +37,6 @@ double lgp(IntegerMatrix & x,
       if(i <= lJ(j)) {
         d2(i, j) = dne(i - 1, j);
         double dt = d2(i, j);
-        //llk = llk + std::log(R::dnorm((dt - mud) / sigd, 0.0, 1.0, false) + eps);
         llk = llk + std::log(R::dnorm(dt, 0.0, 10.0, false) + eps);
       }
     }
@@ -80,9 +74,6 @@ double lgp(IntegerMatrix & x,
 
   for(int l = 0; l < nT - 1; l++) {
     double lambdal = lambda(l);
-    // llk = llk + std::log(R::dunif(lambdal, lambdal_prior_min, lambdal_prior_max,
-    //                               false) + eps);
-    //llk = llk + std::log(d_truncnorm(lambdal, 0.0, 1.0, 0.0, 1000.0) + eps);
     llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
   }
 
@@ -95,10 +86,6 @@ double lgp(IntegerMatrix & x,
     double betaz = beta(zz);
     llk = llk + std::log(R::dnorm(betaz, 0.0, 10.0, false) + eps);
   }
-  
-  //llk = llk + std::log(R::dnorm(mud, mud_prior_mean, mud_prior_stdev, false) + eps);
-  //llk = llk + std::log(R::dunif(sigd, 0.0, sigd_prior_max, false) + eps);
-  //llk = llk + std::log(R::dgamma(sigd, 0.001, 1 / 0.001, false) + eps);
 
   return llk;
 }
@@ -141,11 +128,7 @@ double lt(IntegerMatrix & x,
   for(int it = 1; it < iter; it++) {
     NumericVector prop = Rcpp::rnorm(npar, 0.0, delta);
     NumericVector newpars = oldpars + prop;
-
-    // for(int q = ix(0) - 1; q < ixe(0); q ++){
-    //   oldpars(q) = abs2(oldpars(q));
-    //   newpars(q) = abs2(newpars(q));
-    // }
+    
     for(int q = ix(4) - 1; q < ixe(4); q ++){
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));

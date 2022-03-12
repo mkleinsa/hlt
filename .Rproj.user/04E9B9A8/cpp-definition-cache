@@ -1,7 +1,7 @@
 [
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt.cpp",
-        "file_last_write": 1646933667.0,
+        "file_last_write": 1646965218.0,
         "definitions": [
             {
                 "usr": "c:@F@lgp#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#d#d#d#d#d#",
@@ -18,7 +18,7 @@
                 "parent_name": "",
                 "name": "abs2(double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt.cpp",
-                "line": 106,
+                "line": 107,
                 "column": 8
             },
             {
@@ -27,7 +27,7 @@
                 "parent_name": "",
                 "name": "lt(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt.cpp",
-                "line": 116,
+                "line": 117,
                 "column": 8
             }
         ]
