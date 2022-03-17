@@ -34,8 +34,8 @@ hltsim = function(n, ntheta, lambda, tJ, dL, mua, mud, siga, sigd,
   nT = ntheta + 1
   theta = matrix(0, n, nT)
   theta[, nT] = seq(-3, 3, length.out = n)
+  s.beta = beta #runif(nB, -2, 2)
   if(regression == TRUE) {
-    s.beta = beta #runif(nB, -2, 2)
     theta[, nT] = theta[, nT] + z %*% s.beta + rnorm(n, 0, 0.1)
   }
   for(i in 1:(nT - 1)) {

@@ -10,9 +10,20 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// lgp
-double lgp(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps, double mud_prior_mean, double mud_prior_stdev, double sigd_prior_max, double lambdal_prior_min, double lambdal_prior_max);
-RcppExport SEXP _hlt_lgp(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP, SEXP mud_prior_meanSEXP, SEXP mud_prior_stdevSEXP, SEXP sigd_prior_maxSEXP, SEXP lambdal_prior_minSEXP, SEXP lambdal_prior_maxSEXP) {
+// abs2
+double abs2(double x);
+RcppExport SEXP _hlt_abs2(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(abs2(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp1PNR
+double lgp1PNR(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp1PNR(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,29 +44,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
-    Rcpp::traits::input_parameter< double >::type mud_prior_mean(mud_prior_meanSEXP);
-    Rcpp::traits::input_parameter< double >::type mud_prior_stdev(mud_prior_stdevSEXP);
-    Rcpp::traits::input_parameter< double >::type sigd_prior_max(sigd_prior_maxSEXP);
-    Rcpp::traits::input_parameter< double >::type lambdal_prior_min(lambdal_prior_minSEXP);
-    Rcpp::traits::input_parameter< double >::type lambdal_prior_max(lambdal_prior_maxSEXP);
-    rcpp_result_gen = Rcpp::wrap(lgp(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps, mud_prior_mean, mud_prior_stdev, sigd_prior_max, lambdal_prior_min, lambdal_prior_max));
+    rcpp_result_gen = Rcpp::wrap(lgp1PNR(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
     return rcpp_result_gen;
 END_RCPP
 }
-// abs2
-double abs2(double x);
-RcppExport SEXP _hlt_abs2(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(abs2(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// lt
-double lt(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+// lt1PNR
+double lt1PNR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PNR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -78,15 +73,644 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt1PNR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp1PNR2D
+double lgp1PNR2D(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp1PNR2D(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp1PNR2D(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt1PNR2D
+double lt1PNR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PNR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt1PNR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp1PR
+double lgp1PR(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp1PR(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp1PR(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt1PR
+double lt1PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt1PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp1PR2D
+double lgp1PR2D(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp1PR2D(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp1PR2D(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt1PR2D
+double lt1PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt1PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp2PNR
+double lgp2PNR(IntegerMatrix& x, NumericVector lambda, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, NumericVector a, double eps);
+RcppExport SEXP _hlt_lgp2PNR(SEXP xSEXP, SEXP lambdaSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP aSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp2PNR(x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, a, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt2PNR
+double lt2PNR(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PNR(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt2PNR(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp2PNR2D
+double lgp2PNR2D(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp2PNR2D(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp2PNR2D(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt2PNR2D
+double lt2PNR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PNR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt2PNR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp2PR
+double lgp2PR(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp2PR(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp2PR(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt2PR
+double lt2PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt2PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp2PR2D
+double lgp2PR2D(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp2PR2D(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp2PR2D(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt2PR2D
+double lt2PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt2PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp3PNR
+double lgp3PNR(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp3PNR(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp3PNR(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt3PNR
+double lt3PNR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt3PNR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt3PNR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp3PNR2D
+double lgp3PNR2D(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp3PNR2D(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp3PNR2D(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt3PNR2D
+double lt3PNR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt3PNR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt3PNR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp3PR
+double lgp3PR(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp3PR(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp3PR(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt3PR
+double lt3PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt3PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt3PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lgp3PR2D
+double lgp3PR2D(IntegerMatrix& x, NumericMatrix& z, NumericVector lambda, int nB, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double mud, double sigd, NumericVector a, NumericVector beta, double eps);
+RcppExport SEXP _hlt_lgp3PR2D(SEXP xSEXP, SEXP zSEXP, SEXP lambdaSEXP, SEXP nBSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP mudSEXP, SEXP sigdSEXP, SEXP aSEXP, SEXP betaSEXP, SEXP epsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type mud(mudSEXP);
+    Rcpp::traits::input_parameter< double >::type sigd(sigdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    rcpp_result_gen = Rcpp::wrap(lgp3PR2D(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lt3PR2D
+double lt3PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt3PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type z(zSEXP);
+    Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
+    Rcpp::traits::input_parameter< int >::type burn(burnSEXP);
+    Rcpp::traits::input_parameter< double >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ix(ixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ixe(ixeSEXP);
+    Rcpp::traits::input_parameter< int >::type npar(nparSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type nB(nBSEXP);
+    Rcpp::traits::input_parameter< int >::type J(JSEXP);
+    Rcpp::traits::input_parameter< int >::type nDmax(nDmaxSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(lt3PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_hlt_lgp", (DL_FUNC) &_hlt_lgp, 22},
     {"_hlt_abs2", (DL_FUNC) &_hlt_abs2, 1},
-    {"_hlt_lt", (DL_FUNC) &_hlt_lt, 19},
+    {"_hlt_lgp1PNR", (DL_FUNC) &_hlt_lgp1PNR, 17},
+    {"_hlt_lt1PNR", (DL_FUNC) &_hlt_lt1PNR, 19},
+    {"_hlt_lgp1PNR2D", (DL_FUNC) &_hlt_lgp1PNR2D, 17},
+    {"_hlt_lt1PNR2D", (DL_FUNC) &_hlt_lt1PNR2D, 19},
+    {"_hlt_lgp1PR", (DL_FUNC) &_hlt_lgp1PR, 17},
+    {"_hlt_lt1PR", (DL_FUNC) &_hlt_lt1PR, 19},
+    {"_hlt_lgp1PR2D", (DL_FUNC) &_hlt_lgp1PR2D, 17},
+    {"_hlt_lt1PR2D", (DL_FUNC) &_hlt_lt1PR2D, 19},
+    {"_hlt_lgp2PNR", (DL_FUNC) &_hlt_lgp2PNR, 12},
+    {"_hlt_lt2PNR", (DL_FUNC) &_hlt_lt2PNR, 17},
+    {"_hlt_lgp2PNR2D", (DL_FUNC) &_hlt_lgp2PNR2D, 17},
+    {"_hlt_lt2PNR2D", (DL_FUNC) &_hlt_lt2PNR2D, 19},
+    {"_hlt_lgp2PR", (DL_FUNC) &_hlt_lgp2PR, 15},
+    {"_hlt_lt2PR", (DL_FUNC) &_hlt_lt2PR, 19},
+    {"_hlt_lgp2PR2D", (DL_FUNC) &_hlt_lgp2PR2D, 17},
+    {"_hlt_lt2PR2D", (DL_FUNC) &_hlt_lt2PR2D, 19},
+    {"_hlt_lgp3PNR", (DL_FUNC) &_hlt_lgp3PNR, 17},
+    {"_hlt_lt3PNR", (DL_FUNC) &_hlt_lt3PNR, 19},
+    {"_hlt_lgp3PNR2D", (DL_FUNC) &_hlt_lgp3PNR2D, 17},
+    {"_hlt_lt3PNR2D", (DL_FUNC) &_hlt_lt3PNR2D, 19},
+    {"_hlt_lgp3PR", (DL_FUNC) &_hlt_lgp3PR, 17},
+    {"_hlt_lt3PR", (DL_FUNC) &_hlt_lt3PR, 19},
+    {"_hlt_lgp3PR2D", (DL_FUNC) &_hlt_lgp3PR2D, 17},
+    {"_hlt_lt3PR2D", (DL_FUNC) &_hlt_lt3PR2D, 19},
     {NULL, NULL, 0}
 };
 

@@ -124,7 +124,59 @@
 #' id = c(0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4)
 #' mod = hlt(x, z = z, id = id, iter = 2.2e6, burn = 2e6, delta = 0.013)
 #' 
-hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
+#' 
+#' set.seed(2034)
+#' nB = 1
+#' n = 300
+#' z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+#' xdat = hltsim(n = n, ntheta = 3, lambda = c(0.8, 0.4, 0.3), 
+#'               tJ = id, dL = 4, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+#'               regression = TRUE, z = z, nB = nB, beta = 1)
+#' apply(xdat$x, 2, table)
+#' lm(xdat$theta[,4] ~ xdat$z)
+#' xdat$s.beta
+#' x = xdat$x
+#' 
+#' # Test 1p, 2p, 3p without regression (>2 dims)
+#' #poly
+#' mod = hlt(x, id = id, type = "1p", iter = 2000, delta = 0.013)
+#' mod = hlt(x, id = id, type = "2p", iter = 2000, delta = 0.013)
+#' mod = hlt(x, id = id, type = "3p", iter = 2000, delta = 0.013)
+#' 
+#' #di
+#' x2 = apply(x, 2, function(x) {ifelse(x > 1, 1, 0)})
+#' mod = hlt(x2, id = id, type = "2p", iter = 2000, delta = 0.013)
+#' 
+#'  # Test 1p, 2p, 3p with regression (>2 dims)
+#' #poly
+#' mod = hlt(x, z = z, id = id, type = "2p", iter = 2000, delta = 0.013)
+#' 
+#' #di
+#' mod = hlt(x2, z = z, id = id, type = "2p", iter = 2000, delta = 0.013)
+#' 
+#' # Test 1p, 2p, 3p with regression (=2 dims)
+#' 
+#' #poly
+#' 
+#' #di
+#' 
+#' # Test 1p, 2p, 3p without regression (=2 dims)
+#' 
+#' #poly
+#' 
+#' #di
+#' 
+#' 
+hlt = function(x, 
+               z = NULL, 
+               zitem = NULL,
+               mgroup = NULL,
+               diff = NULL,
+               id, 
+               iter, 
+               burn = iter / 2, 
+               delta,
+               type = "2p",
                progress = TRUE) {
   
     if(!is.matrix(x)) {
@@ -158,43 +210,67 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
       if(!is.matrix(z)) {
         z = as.matrix(z)
       }
+      
       nB = ncol(z)
-      npar = n*nT + (nT - 1) + J + nD*J + nB + 2
       
-      post_names = c(paste0("lambda", 1:(nT - 1)),
-                     as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                     rep(paste0("d", 1:(nD*J))),
-                     "mud", 
-                     "sigsqd", 
-                     paste0("a", 1:J),
-                     paste0("beta", 1:nB))
+      if(type == "1p") {
+        
+        
+        
+      } else if(type == "2p") { 
+        
+        npar = n*nT + (nT - 1) + J + nD*J + nB
+        
+        post_names = c(paste0("lambda", 1:(nT - 1)),
+                       as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
+                       rep(paste0("d", 1:(nD*J))),
+                       paste0("a", 1:J),
+                       paste0("beta", 1:nB))
+        
+        post = matrix(nrow = iter - burn, ncol = npar)
+        post[1, ] = c(runif((nT - 1), 0, 1.9),
+                      rep(rnorm(n, 0, 1), nT),
+                      rep(rnorm(nD*J, 0.2, 1)), 
+                      runif(J, 0.5, 1),
+                      rnorm(nB, 0, 1))
       
-      post = matrix(nrow = iter - burn, ncol = npar)
-      post[1, ] = c(runif((nT - 1), 0, 1.9),
-                    rep(rnorm(n, 0, 1), nT),
-                    rep(rnorm(nD*J, 0.2, 1)), 
-                    runif(1, 1, 1.4), 
-                    runif(1, 0.1, 1.4), 
-                    runif(J, 0.5, 1),
-                    rnorm(nB, 0, 1))
+      } else if(type == "3p") {
+        
+        
+        
+      }
+      
+      
       
     } else {
-      npar = n*nT + (nT - 1) + J + J*(dL - 1) + 2
       
-      post_names = c(paste0("lambda", 1:(nT - 1)),
-                     as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                     rep(paste0("d", 1:J), each = (dL - 1)),
-                     "mud", 
-                     "sigsqd", 
-                     paste0("a", 1:J))
+      if(type == "1p") {
+        
+        
+        
+      } else if(type == "2p") { 
+        
+        
+        npar = n*nT + (nT - 1) + J + nD*J
+        
+        post_names = c(paste0("lambda", 1:(nT - 1)),
+                       as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
+                       rep(paste0("d", 1:(nD*J))),
+                       paste0("a", 1:J))
+        
+        post = matrix(nrow = iter - burn, ncol = npar)
+        post[1, ] = c(runif((nT - 1), 0, 1.9),
+                      rep(rnorm(n, 0, 1), nT),
+                      rep(rnorm(nD*J, 0.2, 1)), 
+                      runif(J, 0.5, 1))
+        
+        
+      } else if(type == "3p") {
+        
+        
+        
+      }
       
-      post = matrix(nrow = iter - burn, ncol = npar)
-      post[1, ] = c(runif((nT - 1), -0.8, 0.8),
-                    rep(rnorm(n, 0, 1), nT),
-                    rep(rnorm(J, 0.2, 1), each = (dL - 1)), 
-                    runif(1, 1, 1.4), 
-                    runif(1, 0.1, 1.4), 
-                    runif(J, 0.5, 1))
       
     }
     
@@ -207,44 +283,73 @@ hlt = function(x, z = NULL, id, iter, burn = iter / 2, delta,
     
     if(!is.null(z)) {
       
-      lt(x = x,
-         z = z,
-         iter = iter,
-         burn = burn,
-         delta = delta,
-         post = post,
-         ix = ix,
-         ixe = ixe,
-         npar = npar,
-         n = n,
-         nB = nB,
-         J = J,
-         nDmax = nD,
-         lJ = lJ,
-         nT = nT,
-         tJ = id,
-         accept = accept,
-         eps = .Machine$double.eps,
-         display_progress = progress)
+      if(type == "1p") {
+        
+        
+        
+      } else if(type == "2p") {
+        
+        lt2PR(x = x,
+              z = z,
+              iter = iter,
+              burn = burn,
+              delta = delta,
+              post = post,
+              ix = ix,
+              ixe = ixe,
+              npar = npar,
+              n = n,
+              nB = nB,
+              J = J,
+              nDmax = nD,
+              lJ = lJ,
+              nT = nT,
+              tJ = id,
+              accept = accept,
+              eps = .Machine$double.eps,
+              display_progress = progress)
+        
+      } else if(type == "3p") {
+        
+        
+        
+      }
+      
+      
     
     } else {
       
-      lt(x = x,
-         iter = iter,
-         burn = burn,
-         delta = delta,
-         post = post,
-         ix = ix,
-         ixe = ixe,
-         npar = npar,
-         n = n,
-         J = J,
-         nD = nD,
-         nT = nT,
-         tJ = id,
-         accept = accept,
-         eps = .Machine$double.eps,
-         display_progress = progress)
+      if(type == "1p") {
+        
+        
+        
+      } else if(type == "2p") {
+        
+        lt2PNR(x = x,
+               iter = iter,
+               burn = burn,
+               delta = delta,
+               post = post,
+               ix = ix,
+               ixe = ixe,
+               npar = npar,
+               n = n,
+               J = J,
+               nDmax = nD,
+               lJ = lJ,
+               nT = nT,
+               tJ = id,
+               accept = accept,
+               eps = .Machine$double.eps,
+               display_progress = progress)
+        
+      } else if(type == "3p") {
+        
+        
+        
+      }
+      
+      
       
     }
     
