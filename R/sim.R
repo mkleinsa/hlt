@@ -16,7 +16,7 @@
 #'               dL = 5, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
 #'               regression = FALSE, z = NULL)
 #' apply(xdat$x, 2, table)
-#'               
+#' 
 #' nB = 1
 #' n = 100
 #' z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
@@ -28,9 +28,81 @@
 #' lm(xdat$theta[,4] ~ xdat$z)
 #' xdat$s.beta
 #' 
+#' 
+#' # 2 dimension examples
+#' 
+#' # PCM
+#' 
+#' xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = NULL)
+#' apply(xdat$x, 2, table)
+#' 
+#' nB = 5
+#' z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+#' xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = TRUE, z = z)
+#' apply(xdat$x, 2, table)
+#' 
+#' 
+#' # GPCM
+#' 
+#' xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+#'               regression = FALSE, z = NULL)
+#' apply(xdat$x, 2, table)
+#' 
+#' nB = 5
+#' z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+#' xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+#'               regression = TRUE, z = z)
+#' apply(xdat$x, 2, table)
+#' 
+#' 
+#' # 4 dimension examples
+#' 
+#' # PCM
+#' 
+#' xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = NULL)
+#' apply(xdat$x, 2, table)
+#' 
+#' nB = 5
+#' z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+#' xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = TRUE, z = z)
+#' apply(xdat$x, 2, table)
+#' 
+#' 
+#' # GPCM
+#' 
+#' xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+#'               regression = FALSE, z = NULL)
+#' apply(xdat$x, 2, table)
+#' 
+#' nB = 5
+#' z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+#' xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+#'               regression = TRUE, z = z)
+#' apply(xdat$x, 2, table)
+#' 
 #' @importFrom truncnorm rtruncnorm
 hltsim = function(n, ntheta, lambda, tJ, dL, mua, mud, siga, sigd, 
-                  regression = FALSE, z = NULL, nB, beta) {
+                  regression = FALSE, z = NULL, nB, beta = NULL) {
   nT = ntheta + 1
   theta = matrix(0, n, nT)
   theta[, nT] = seq(-3, 3, length.out = n)
@@ -49,14 +121,22 @@ hltsim = function(n, ntheta, lambda, tJ, dL, mua, mud, siga, sigd,
   s.mud = mud
   s.siga = siga
   s.sigd = sigd
-  s.alpha = rtruncnorm(J, a = 0, mean = s.mua, sd = s.siga) #rnorm(J, s.mua, s.sigsqa)
+  if(!is.null(s.mua)) {
+    s.alpha = rtruncnorm(J, a = 0, mean = s.mua, sd = s.siga) #rnorm(J, s.mua, s.sigsqa)
+  } else {
+    s.alpha = 0
+  }
   s.delta = mapply(1:J, FUN = function(x) {sort(rnorm(dL, s.mud, s.sigd))}, SIMPLIFY = "matrix")
   s.delta[1, ] = rep(0, J)
   s.lambda = lambda
   x = matrix(0, n, J)
   for (i in 1:n) {
     for (j in 1:J) {
-      exp_part = exp(cumsum(s.alpha[j] * (s.theta[i, tJ[j] + 1] - s.delta[, j])))
+      if(!is.null(s.mua)) {
+        exp_part = exp(cumsum(s.alpha[j] * (s.theta[i, tJ[j] + 1] - s.delta[, j])))
+      } else {
+        exp_part = exp(cumsum((s.theta[i, tJ[j] + 1] - s.delta[, j])))
+      }
       x[i, j] = sample(1:(dL) - 1, size = 1, prob = exp_part / sum(exp_part))
     }
   }

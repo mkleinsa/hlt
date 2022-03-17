@@ -5,32 +5,32 @@ abs2 <- function(x) {
     .Call(`_hlt_abs2`, x)
 }
 
-lgp1PNR <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp1PNR`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
+lgp1PNR <- function(x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, eps) {
+    .Call(`_hlt_lgp1PNR`, x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, eps)
 }
 
-lt1PNR <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt1PNR`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
+lt1PNR <- function(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
+    .Call(`_hlt_lt1PNR`, x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 
-lgp1PNR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp1PNR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
+lgp1PNR2D <- function(x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, eps) {
+    .Call(`_hlt_lgp1PNR2D`, x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, eps)
 }
 
-lt1PNR2D <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt1PNR2D`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
+lt1PNR2D <- function(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
+    .Call(`_hlt_lt1PNR2D`, x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 
-lgp1PR <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp1PR`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
+lgp1PR <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, beta, eps) {
+    .Call(`_hlt_lgp1PR`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, beta, eps)
 }
 
 lt1PR <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
     .Call(`_hlt_lt1PR`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 
-lgp1PR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp1PR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
+lgp1PR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, beta, eps) {
+    .Call(`_hlt_lgp1PR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, beta, eps)
 }
 
 lt1PR2D <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
@@ -45,12 +45,12 @@ lt2PNR <- function(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, n
     .Call(`_hlt_lt2PNR`, x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 
-lgp2PNR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp2PNR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
+lgp2PNR2D <- function(x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, a, eps) {
+    .Call(`_hlt_lgp2PNR2D`, x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, a, eps)
 }
 
-lt2PNR2D <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt2PNR2D`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
+lt2PNR2D <- function(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
+    .Call(`_hlt_lt2PNR2D`, x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 
 lgp2PR <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, a, beta, eps) {
@@ -61,43 +61,11 @@ lt2PR <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax,
     .Call(`_hlt_lt2PR`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 
-lgp2PR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp2PR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
+lgp2PR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, a, beta, eps) {
+    .Call(`_hlt_lgp2PR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, a, beta, eps)
 }
 
 lt2PR2D <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
     .Call(`_hlt_lt2PR2D`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
-}
-
-lgp3PNR <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp3PNR`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
-}
-
-lt3PNR <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt3PNR`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
-}
-
-lgp3PNR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp3PNR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
-}
-
-lt3PNR2D <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt3PNR2D`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
-}
-
-lgp3PR <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp3PR`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
-}
-
-lt3PR <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt3PR`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
-}
-
-lgp3PR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps) {
-    .Call(`_hlt_lgp3PR2D`, x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, mud, sigd, a, beta, eps)
-}
-
-lt3PR2D <- function(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
-    .Call(`_hlt_lt3PR2D`, x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
 }
 

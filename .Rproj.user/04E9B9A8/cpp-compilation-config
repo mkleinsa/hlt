@@ -5,19 +5,20 @@
         "-I/Library/Developer/CommandLineTools/usr/lib/clang/13.0.0/include",
         "-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include",
         "-I/Library/Developer/CommandLineTools/usr/include",
-        "-I/Library/Frameworks/R.framework/Versions/4.1/Resources/library/Rcpp/include",
-        "-I/Library/Frameworks/R.framework/Versions/4.1/Resources/library/RcppDist/include",
-        "-I/Library/Frameworks/R.framework/Versions/4.1/Resources/library/RcppProgress/include",
+        "-I/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/Rcpp/include",
+        "-I/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppDist/include",
+        "-I/Library/Frameworks/R.framework/Versions/4.1-arm64/Resources/library/RcppProgress/include",
         "-std=gnu++14",
         "-I/Library/Frameworks/R.framework/Resources/include",
         "-DNDEBUG",
-        "-I/usr/local/include",
+        "-I/opt/R/arm64/include",
         "-I/opt/homebrew/opt/llvm/include",
         "-fopenmp",
-        "-fPIC"
+        "-fPIC",
+        "-falign-functions=64"
     ],
     "pch": "Rcpp",
     "is_cpp": true,
     "hash": "16474467931647394620",
-    "compiler": "9491748075428862174"
+    "compiler": "7668556428067003684"
 }

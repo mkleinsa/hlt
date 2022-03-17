@@ -98,13 +98,13 @@ double lt2PNR2D(IntegerMatrix & x,
   Progress p(iter, display_progress);
   
   NumericVector oldpars = post(0, _ );
-  oldpars[Range(ix(0), ix(0))] = oldpars[Range(ix(0) - 1, ix(0) - 1)];
+  oldpars[ix(0)] = oldpars[ix(0) - 1];
   
   for(int it = 1; it < iter; it++) {
     NumericVector prop = Rcpp::rnorm(npar, 0.0, delta);
     NumericVector newpars = oldpars + prop;
     
-    newpars[Range(ix(0), ix(0))] = newpars[Range(ix(0) - 1, ix(0) - 1)];
+    newpars[ix(0)] = newpars[ix(0) - 1];
     
     for(int q = ix(3) - 1; q < ixe(3); q ++){
       oldpars(q) = abs2(oldpars(q));

@@ -17,7 +17,7 @@ hltsim(
   regression = FALSE,
   z = NULL,
   nB,
-  beta
+  beta = NULL
 )
 }
 \arguments{
@@ -48,7 +48,7 @@ xdat = hltsim(n = 100, ntheta = 3, lambda = c(0.8, 0.4, 0.3),
               dL = 5, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
               regression = FALSE, z = NULL)
 apply(xdat$x, 2, table)
-              
+
 nB = 1
 n = 100
 z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
@@ -59,5 +59,77 @@ xdat = hltsim(n = 100, ntheta = 3, lambda = c(0.8, 0.4, 0.3),
 apply(xdat$x, 2, table)
 lm(xdat$theta[,4] ~ xdat$z)
 xdat$s.beta
+
+
+# 2 dimension examples
+
+# PCM
+
+xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = NULL)
+apply(xdat$x, 2, table)
+
+nB = 5
+z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = TRUE, z = z)
+apply(xdat$x, 2, table)
+
+
+# GPCM
+
+xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+              regression = FALSE, z = NULL)
+apply(xdat$x, 2, table)
+
+nB = 5
+z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+xdat = hltsim(n = 100, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+              regression = TRUE, z = z)
+apply(xdat$x, 2, table)
+
+
+# 4 dimension examples
+
+# PCM
+
+xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = NULL)
+apply(xdat$x, 2, table)
+
+nB = 5
+z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 2, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = TRUE, z = z)
+apply(xdat$x, 2, table)
+
+
+# GPCM
+
+xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+              regression = FALSE, z = NULL)
+apply(xdat$x, 2, table)
+
+nB = 5
+z = matrix(sample(0:1, n, replace = TRUE), nrow = n, ncol = nB)
+xdat = hltsim(n = 100, ntheta = 4, lambda = c(0.7, 0.2, 0.8, 0.4), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 7, mua = 1, mud = 1.4, siga = 0.8, sigd = 1,
+              regression = TRUE, z = z)
+apply(xdat$x, 2, table)
 
 }

@@ -20,77 +20,62 @@
         "definitions": []
     },
     {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/helper/abs2.cpp",
-        "file_last_write": 1647288012.0,
-        "definitions": [
-            {
-                "usr": "c:@F@abs2#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "abs2(double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/helper/abs2.cpp",
-                "line": 5,
-                "column": 8
-            }
-        ]
-    },
-    {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_no_regress.cpp",
-        "file_last_write": 1647396551.0,
+        "file_last_write": 1647545749.0,
         "definitions": [
             {
-                "usr": "c:@F@lgp1PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
+                "usr": "c:@F@lgp1PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#S2_#I#S2_#S2_#S2_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lgp1PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
+                "name": "lgp1PNR(Rcpp::IntegerMatrix &, Rcpp::NumericVector, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_no_regress.cpp",
                 "line": 11,
                 "column": 8
             },
             {
-                "usr": "c:@F@lt1PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
+                "usr": "c:@F@lt1PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lt1PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
+                "name": "lt1PNR(Rcpp::IntegerMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_no_regress.cpp",
-                "line": 95,
+                "line": 74,
                 "column": 8
             }
         ]
     },
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_no_regress_2dim.cpp",
-        "file_last_write": 1647396607.0,
+        "file_last_write": 1647546954.0,
         "definitions": [
             {
-                "usr": "c:@F@lgp1PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
+                "usr": "c:@F@lgp1PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#S2_#I#S2_#S2_#S2_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lgp1PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
+                "name": "lgp1PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericVector, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_no_regress_2dim.cpp",
                 "line": 11,
                 "column": 8
             },
             {
-                "usr": "c:@F@lt1PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
+                "usr": "c:@F@lt1PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lt1PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
+                "name": "lt1PNR2D(Rcpp::IntegerMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_no_regress_2dim.cpp",
-                "line": 95,
+                "line": 74,
                 "column": 8
             }
         ]
     },
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_regress.cpp",
-        "file_last_write": 1647396607.0,
+        "file_last_write": 1647546135.0,
         "definitions": [
             {
-                "usr": "c:@F@lgp1PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
+                "usr": "c:@F@lgp1PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#S4_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lgp1PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
+                "name": "lgp1PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_regress.cpp",
                 "line": 11,
                 "column": 8
@@ -101,20 +86,20 @@
                 "parent_name": "",
                 "name": "lt1PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_regress.cpp",
-                "line": 95,
+                "line": 87,
                 "column": 8
             }
         ]
     },
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_regress_2dim.cpp",
-        "file_last_write": 1647396607.0,
+        "file_last_write": 1647547273.0,
         "definitions": [
             {
-                "usr": "c:@F@lgp1PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
+                "usr": "c:@F@lgp1PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#S4_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lgp1PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
+                "name": "lgp1PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_regress_2dim.cpp",
                 "line": 11,
                 "column": 8
@@ -125,7 +110,7 @@
                 "parent_name": "",
                 "name": "lt1PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_1p_gpcm_regress_2dim.cpp",
-                "line": 95,
+                "line": 87,
                 "column": 8
             }
         ]
@@ -156,24 +141,24 @@
     },
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_2p_gpcm_no_regress_2dim.cpp",
-        "file_last_write": 1647396607.0,
+        "file_last_write": 1647547494.0,
         "definitions": [
             {
-                "usr": "c:@F@lgp2PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
+                "usr": "c:@F@lgp2PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#S2_#I#S2_#S2_#S2_#S2_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lgp2PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
+                "name": "lgp2PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericVector, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_2p_gpcm_no_regress_2dim.cpp",
                 "line": 11,
                 "column": 8
             },
             {
-                "usr": "c:@F@lt2PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
+                "usr": "c:@F@lt2PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lt2PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
+                "name": "lt2PNR2D(Rcpp::IntegerMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_2p_gpcm_no_regress_2dim.cpp",
-                "line": 95,
+                "line": 80,
                 "column": 8
             }
         ]
@@ -204,13 +189,13 @@
     },
     {
         "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_2p_gpcm_regress_2dim.cpp",
-        "file_last_write": 1647396607.0,
+        "file_last_write": 1647547684.0,
         "definitions": [
             {
-                "usr": "c:@F@lgp2PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
+                "usr": "c:@F@lgp2PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#S4_#S4_#d#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "lgp2PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
+                "name": "lgp2PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_2p_gpcm_regress_2dim.cpp",
                 "line": 11,
                 "column": 8
@@ -221,391 +206,7 @@
                 "parent_name": "",
                 "name": "lt2PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
                 "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_2p_gpcm_regress_2dim.cpp",
-                "line": 95,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_no_regress.cpp",
-        "file_last_write": 1647396607.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_no_regress.cpp",
-                "line": 11,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_no_regress.cpp",
-                "line": 95,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_no_regress_2dim.cpp",
-        "file_last_write": 1647396607.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_no_regress_2dim.cpp",
-                "line": 11,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_no_regress_2dim.cpp",
-                "line": 95,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_regress.cpp",
-        "file_last_write": 1647396607.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_regress.cpp",
-                "line": 11,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_regress.cpp",
-                "line": 95,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_regress_2dim.cpp",
-        "file_last_write": 1647396607.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_regress_2dim.cpp",
-                "line": 11,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/hlt_3p_gpcm_regress_2dim.cpp",
-                "line": 95,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_1p_gpcm_no_regress_2dim.cpp",
-        "file_last_write": 1647288251.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp1PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp1PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_1p_gpcm_no_regress_2dim.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt1PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt1PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_1p_gpcm_no_regress_2dim.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_1p_gpcm_regress_2dim.cpp",
-        "file_last_write": 1647288236.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp1PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp1PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_1p_gpcm_regress_2dim.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt1PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt1PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_1p_gpcm_regress_2dim.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_2p_gpcm_no_regress_2dim.cpp",
-        "file_last_write": 1647288223.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp2PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp2PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_2p_gpcm_no_regress_2dim.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt2PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt2PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_2p_gpcm_no_regress_2dim.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_2p_gpcm_regress_2dim.cpp",
-        "file_last_write": 1647288201.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp2PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp2PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_2p_gpcm_regress_2dim.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt2PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt2PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_2p_gpcm_regress_2dim.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_3p_gpcm_no_regress_2dim.cpp",
-        "file_last_write": 1647288183.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_3p_gpcm_no_regress_2dim.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PNR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PNR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_3p_gpcm_no_regress_2dim.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_3p_gpcm_regress_2dim.cpp",
-        "file_last_write": 1647288165.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_3p_gpcm_regress_2dim.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PR2D#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PR2D(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/dim2/hlt_3p_gpcm_regress_2dim.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_1p_gpcm_no_regress.cpp",
-        "file_last_write": 1647288048.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp1PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp1PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_1p_gpcm_no_regress.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt1PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt1PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_1p_gpcm_no_regress.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_1p_gpcm_regress.cpp",
-        "file_last_write": 1647288139.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp1PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp1PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_1p_gpcm_regress.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt1PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt1PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_1p_gpcm_regress.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_2p_gpcm_no_regress.cpp",
-        "file_last_write": 1647394287.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp2PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#S2_#I#S2_#S2_#S2_#S2_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp2PNR(Rcpp::IntegerMatrix &, Rcpp::NumericVector, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_2p_gpcm_no_regress.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt2PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt2PNR(Rcpp::IntegerMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_2p_gpcm_no_regress.cpp",
-                "line": 79,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_2p_gpcm_regress.cpp",
-        "file_last_write": 1647393954.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp2PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp2PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_2p_gpcm_regress.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt2PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt2PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_2p_gpcm_regress.cpp",
-                "line": 92,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_3p_gpcm_no_regress.cpp",
-        "file_last_write": 1647288094.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_3p_gpcm_no_regress.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PNR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PNR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_3p_gpcm_no_regress.cpp",
-                "line": 94,
-                "column": 8
-            }
-        ]
-    },
-    {
-        "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_3p_gpcm_regress.cpp",
-        "file_last_write": 1647288080.0,
-        "definitions": [
-            {
-                "usr": "c:@F@lgp3PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#I#I#S4_#I#S4_#S4_#S4_#d#d#S4_#S4_#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lgp3PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, Rcpp::NumericVector, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector, Rcpp::NumericVector, double, double, Rcpp::NumericVector, Rcpp::NumericVector, double)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_3p_gpcm_regress.cpp",
-                "line": 10,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@lt3PR#&$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#&$@N@Rcpp@S@Matrix>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#I#I#d#S2_#$@N@Rcpp@S@Vector>#VI14#@N@Rcpp@ST>1#T@PreserveStorage#S4_#I#I#I#I#I#S4_#I#S4_#&S4_#d#b#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "lt3PR(Rcpp::IntegerMatrix &, Rcpp::NumericMatrix &, int, int, double, Rcpp::NumericMatrix &, Rcpp::NumericVector, Rcpp::NumericVector, int, int, int, int, int, Rcpp::NumericVector, int, Rcpp::NumericVector, Rcpp::NumericVector &, double, bool)",
-                "file": "/Users/mk/Dropbox (University of Michigan)/ATP/hlt/src/standard/hlt_3p_gpcm_regress.cpp",
-                "line": 94,
+                "line": 93,
                 "column": 8
             }
         ]
