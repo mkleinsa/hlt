@@ -1,14 +1,17 @@
 #' 
 #' @import ggplot2
 #' @exportS3Method plot hltObj
-plot.hltObj = function(mod, type, x, ...) {
-  post = mod$post
+plot.hltObj = function(x, ...) {
+  args = list(...)
+  type = args$type
+  param = args$param 
+  post = x$post
   nr = nrow(post)
   if(type == "trace") {
-    ggplot(data.frame(x = 1:nr, y = post[, x]), aes(x, y)) + geom_line() + 
+    ggplot(data.frame(param = 1:nr, y = post[, param]), aes(param, y)) + geom_line() + 
       xlab("iteration") + ylab("value") + get_theme()
   } else if(type == "icc") {
-    plot.hltObj.icc(mod, x = x, type = type, ...)
+    plot.hltObj.icc(x, x = param, type = type, ...)
   }
 }
 

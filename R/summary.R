@@ -1,6 +1,10 @@
 #' @exportS3Method summary hltObj
-summary.hltObj = function(x, param, dimension = NULL, cor.theta = NULL) {
-  post = x$post
+summary.hltObj = function(object, ...) {
+  param = args$param
+  dimension = args$dimension
+  cor.theta = args$cor.theta
+  args = list(...)
+  post = object$post
   nms = colnames(post)
   if (param == "all") {
     smry = apply(post, 2, smy)
@@ -13,7 +17,7 @@ summary.hltObj = function(x, param, dimension = NULL, cor.theta = NULL) {
   } else if (param == "beta") {
     smry = apply(post[, grepl("beta", nms), drop = FALSE], 2, smy)
   } else if (param == "cor.theta") {
-    smry = apply(x$corr_theta, 2, smy)
+    smry = apply(object$corr_theta, 2, smy)
   } else if (param == "theta") {
     smry = apply(post[, grepl(paste0("theta", dimension), nms), drop = FALSE], 2, mean)
   }
