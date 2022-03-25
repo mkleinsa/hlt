@@ -214,20 +214,19 @@
 #' 
 hlt = function(x, 
                z = NULL, 
-               zitem = NULL,
-               mgroup = NULL,
-               diff = NULL,
                id, 
                iter, 
                burn = iter / 2, 
                delta,
                type = "2p",
+               start = list(lambda = c(), theta = c(), delta = c(), 
+                            alpha = c(), beta = c()),
                progress = TRUE) {
   
     if(!is.matrix(x)) {
       x = as.matrix(x)
     }
-  
+    
     ntheta = length(unique(id))
     
     if(ntheta < 2) {
@@ -264,7 +263,7 @@ hlt = function(x,
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                       rep(paste0("d", 1:(nD*J))),
+                       as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})),
                        paste0("beta", 1:nB))
         
         post = matrix(nrow = iter - burn, ncol = npar)
@@ -279,7 +278,7 @@ hlt = function(x,
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                       rep(paste0("d", 1:(nD*J))),
+                       as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})),
                        paste0("a", 1:J),
                        paste0("beta", 1:nB))
         
@@ -302,7 +301,7 @@ hlt = function(x,
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                       rep(paste0("d", 1:(nD*J))))
+                       as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})))
         
         post = matrix(nrow = iter - burn, ncol = npar)
         post[1, ] = c(runif((nT - 1), 0, 1.9),
@@ -316,7 +315,7 @@ hlt = function(x,
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                       rep(paste0("d", 1:(nD*J))),
+                       as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})),
                        paste0("a", 1:J))
         
         post = matrix(nrow = iter - burn, ncol = npar)
@@ -335,6 +334,8 @@ hlt = function(x,
     
     accept = numeric(iter)
     accept[1] = 1
+    
+    corr_theta = matrix(data = 0, nrow = iter - burn, ncol = nT - 1)
     
     if(!is.null(z)) {
       if(type == "1p") {
@@ -355,6 +356,7 @@ hlt = function(x,
                   lJ = lJ,
                   nT = nT,
                   tJ = id,
+                  corr_theta = corr_theta,
                   accept = accept,
                   eps = .Machine$double.eps,
                   display_progress = progress)
@@ -375,6 +377,7 @@ hlt = function(x,
                 lJ = lJ,
                 nT = nT,
                 tJ = id,
+                corr_theta = corr_theta,
                 accept = accept,
                 eps = .Machine$double.eps,
                 display_progress = progress)
@@ -397,6 +400,7 @@ hlt = function(x,
                   lJ = lJ,
                   nT = nT,
                   tJ = id,
+                  corr_theta = corr_theta,
                   accept = accept,
                   eps = .Machine$double.eps,
                   display_progress = progress)
@@ -417,6 +421,7 @@ hlt = function(x,
                 lJ = lJ,
                 nT = nT,
                 tJ = id,
+                corr_theta = corr_theta,
                 accept = accept,
                 eps = .Machine$double.eps,
                 display_progress = progress)
@@ -440,6 +445,7 @@ hlt = function(x,
                    lJ = lJ,
                    nT = nT,
                    tJ = id,
+                   corr_theta = corr_theta,
                    accept = accept,
                    eps = .Machine$double.eps,
                    display_progress = progress)
@@ -458,6 +464,7 @@ hlt = function(x,
                  lJ = lJ,
                  nT = nT,
                  tJ = id,
+                 corr_theta = corr_theta,
                  accept = accept,
                  eps = .Machine$double.eps,
                  display_progress = progress)
@@ -478,6 +485,7 @@ hlt = function(x,
                    lJ = lJ,
                    nT = nT,
                    tJ = id,
+                   corr_theta = corr_theta,
                    accept = accept,
                    eps = .Machine$double.eps,
                    display_progress = progress)
@@ -496,6 +504,7 @@ hlt = function(x,
                  lJ = lJ,
                  nT = nT,
                  tJ = id,
+                 corr_theta = corr_theta,
                  accept = accept,
                  eps = .Machine$double.eps,
                  display_progress = progress)
@@ -520,7 +529,8 @@ hlt = function(x,
     
     accept.rate = mean(accept)
     
-    result = list(post = post, accept = accept, accept.rate = accept.rate)
+    result = list(post = post, accept = accept, accept.rate = accept.rate,
+                  corr_theta = corr_theta)
     
     class(result) = c("hltObj")
     return(result)

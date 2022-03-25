@@ -6,6 +6,7 @@ using namespace Rcpp;
 #include <progress.hpp>
 #include <progress_bar.hpp>
 #include "abs2.h"
+#include "standardize_lambda.h"
 
 // [[Rcpp::export]]
 double lgp2PR2D(IntegerMatrix & x,
@@ -106,6 +107,7 @@ double lt2PR2D(IntegerMatrix & x,
                NumericVector lJ,
                int nT,
                NumericVector tJ,
+               NumericMatrix & corr_theta,
                NumericVector & accept,
                double eps,
                bool display_progress = true) {
@@ -176,6 +178,8 @@ double lt2PR2D(IntegerMatrix & x,
     
     p.increment();
   }
+  
+  standardize_lambda(post, ix(1) - 1, ixe(1) - 1, nT, n, corr_theta);
   
   return 1.0;
 }

@@ -21,6 +21,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// correlation
+double correlation(NumericVector x, NumericVector y);
+RcppExport SEXP _hlt_correlation(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(correlation(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// covariance
+double covariance(NumericVector x, NumericVector y);
+RcppExport SEXP _hlt_covariance(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(covariance(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // lgp1PNR
 double lgp1PNR(IntegerMatrix& x, NumericVector lambda, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double eps);
 RcppExport SEXP _hlt_lgp1PNR(SEXP xSEXP, SEXP lambdaSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP epsSEXP) {
@@ -43,8 +67,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt1PNR
-double lt1PNR(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt1PNR(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt1PNR(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PNR(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -62,10 +86,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt1PNR(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt1PNR(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -91,8 +116,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt1PNR2D
-double lt1PNR2D(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt1PNR2D(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt1PNR2D(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PNR2D(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -110,10 +135,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt1PNR2D(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt1PNR2D(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -142,8 +168,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt1PR
-double lt1PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt1PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt1PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -163,10 +189,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt1PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt1PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -195,8 +222,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt1PR2D
-double lt1PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt1PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt1PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt1PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -216,10 +243,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt1PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt1PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -246,8 +274,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt2PNR
-double lt2PNR(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt2PNR(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt2PNR(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PNR(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -265,10 +293,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt2PNR(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt2PNR(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -295,8 +324,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt2PNR2D
-double lt2PNR2D(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt2PNR2D(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt2PNR2D(IntegerMatrix& x, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PNR2D(SEXP xSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -314,10 +343,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt2PNR2D(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt2PNR2D(x, iter, burn, delta, post, ix, ixe, npar, n, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -347,8 +377,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt2PR
-double lt2PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt2PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt2PR(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PR(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -368,10 +398,11 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt2PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt2PR(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -401,8 +432,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // lt2PR2D
-double lt2PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericVector& accept, double eps, bool display_progress);
-RcppExport SEXP _hlt_lt2PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
+double lt2PR2D(IntegerMatrix& x, NumericMatrix& z, int iter, int burn, double delta, NumericMatrix& post, NumericVector ix, NumericVector ixe, int npar, int n, int nB, int J, int nDmax, NumericVector lJ, int nT, NumericVector tJ, NumericMatrix& corr_theta, NumericVector& accept, double eps, bool display_progress);
+RcppExport SEXP _hlt_lt2PR2D(SEXP xSEXP, SEXP zSEXP, SEXP iterSEXP, SEXP burnSEXP, SEXP deltaSEXP, SEXP postSEXP, SEXP ixSEXP, SEXP ixeSEXP, SEXP nparSEXP, SEXP nSEXP, SEXP nBSEXP, SEXP JSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP nTSEXP, SEXP tJSEXP, SEXP corr_thetaSEXP, SEXP acceptSEXP, SEXP epsSEXP, SEXP display_progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -422,32 +453,51 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type lJ(lJSEXP);
     Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type tJ(tJSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type corr_theta(corr_thetaSEXP);
     Rcpp::traits::input_parameter< NumericVector& >::type accept(acceptSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< bool >::type display_progress(display_progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(lt2PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress));
+    rcpp_result_gen = Rcpp::wrap(lt2PR2D(x, z, iter, burn, delta, post, ix, ixe, npar, n, nB, J, nDmax, lJ, nT, tJ, corr_theta, accept, eps, display_progress));
     return rcpp_result_gen;
+END_RCPP
+}
+// standardize_lambda
+void standardize_lambda(Rcpp::NumericMatrix& post, int start_idx, int end_idx, int nT, int n, Rcpp::NumericMatrix& corr_theta);
+RcppExport SEXP _hlt_standardize_lambda(SEXP postSEXP, SEXP start_idxSEXP, SEXP end_idxSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP corr_thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type post(postSEXP);
+    Rcpp::traits::input_parameter< int >::type start_idx(start_idxSEXP);
+    Rcpp::traits::input_parameter< int >::type end_idx(end_idxSEXP);
+    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type corr_theta(corr_thetaSEXP);
+    standardize_lambda(post, start_idx, end_idx, nT, n, corr_theta);
+    return R_NilValue;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_hlt_abs2", (DL_FUNC) &_hlt_abs2, 1},
+    {"_hlt_correlation", (DL_FUNC) &_hlt_correlation, 2},
+    {"_hlt_covariance", (DL_FUNC) &_hlt_covariance, 2},
     {"_hlt_lgp1PNR", (DL_FUNC) &_hlt_lgp1PNR, 11},
-    {"_hlt_lt1PNR", (DL_FUNC) &_hlt_lt1PNR, 17},
+    {"_hlt_lt1PNR", (DL_FUNC) &_hlt_lt1PNR, 18},
     {"_hlt_lgp1PNR2D", (DL_FUNC) &_hlt_lgp1PNR2D, 11},
-    {"_hlt_lt1PNR2D", (DL_FUNC) &_hlt_lt1PNR2D, 17},
+    {"_hlt_lt1PNR2D", (DL_FUNC) &_hlt_lt1PNR2D, 18},
     {"_hlt_lgp1PR", (DL_FUNC) &_hlt_lgp1PR, 14},
-    {"_hlt_lt1PR", (DL_FUNC) &_hlt_lt1PR, 19},
+    {"_hlt_lt1PR", (DL_FUNC) &_hlt_lt1PR, 20},
     {"_hlt_lgp1PR2D", (DL_FUNC) &_hlt_lgp1PR2D, 14},
-    {"_hlt_lt1PR2D", (DL_FUNC) &_hlt_lt1PR2D, 19},
+    {"_hlt_lt1PR2D", (DL_FUNC) &_hlt_lt1PR2D, 20},
     {"_hlt_lgp2PNR", (DL_FUNC) &_hlt_lgp2PNR, 12},
-    {"_hlt_lt2PNR", (DL_FUNC) &_hlt_lt2PNR, 17},
+    {"_hlt_lt2PNR", (DL_FUNC) &_hlt_lt2PNR, 18},
     {"_hlt_lgp2PNR2D", (DL_FUNC) &_hlt_lgp2PNR2D, 12},
-    {"_hlt_lt2PNR2D", (DL_FUNC) &_hlt_lt2PNR2D, 17},
+    {"_hlt_lt2PNR2D", (DL_FUNC) &_hlt_lt2PNR2D, 18},
     {"_hlt_lgp2PR", (DL_FUNC) &_hlt_lgp2PR, 15},
-    {"_hlt_lt2PR", (DL_FUNC) &_hlt_lt2PR, 19},
+    {"_hlt_lt2PR", (DL_FUNC) &_hlt_lt2PR, 20},
     {"_hlt_lgp2PR2D", (DL_FUNC) &_hlt_lgp2PR2D, 15},
-    {"_hlt_lt2PR2D", (DL_FUNC) &_hlt_lt2PR2D, 19},
+    {"_hlt_lt2PR2D", (DL_FUNC) &_hlt_lt2PR2D, 20},
+    {"_hlt_standardize_lambda", (DL_FUNC) &_hlt_standardize_lambda, 6},
     {NULL, NULL, 0}
 };
 

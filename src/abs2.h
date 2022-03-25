@@ -1,4 +1,3 @@
-#include <Rcpp.h>
 #ifndef ABS2_H
 #define ABS2_H
 
