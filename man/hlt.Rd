@@ -7,14 +7,12 @@
 hlt(
   x,
   z = NULL,
-  zitem = NULL,
-  mgroup = NULL,
-  diff = NULL,
   id,
   iter,
   burn = iter/2,
   delta,
   type = "2p",
+  start = list(lambda = c(), theta = c(), delta = c(), alpha = c(), beta = c()),
   progress = TRUE
 )
 }
@@ -45,6 +43,24 @@ like c(0,0,0,0,0,1,1,1,1,1,2,2,2,2,2).}
 \item{delta}{tuning parameter for Metropolis-Hanstings algorithm. Alter 
 delta until acceptance.ratio =~ 0.234.}
 
+\item{type}{type of Partial Credit Model to fit. If the partial credit model
+is desired (i.e. all alpha parameters = 1), then choose `type = "1p"`.
+If the Generalized Parial Credit Model is desired, then choose
+`type = "2p"`. The default is `type = "2p"`.}
+
+\item{start}{starting values for the Metropolis-Hastings algorithm. 
+Provide a `list` with the following named arguments:
+`list(lambda = c(), theta = c(), delta = c(), alpha = c(), beta = c())`
+\itemize{
+  \item{lambda - }{vector of starting values for the latent factor loadings.}
+  \item{theta - }{vector of starting values for the abilities.}
+  \item{delta - }{vector of starting values for the difficulties.}
+  \item{alpha - }{vector of starting values for the slope parameters.}
+  \item{beta - }{vector of starting values for the latent regression parameters}
+}
+If you choose specify starting values, then the lengths of the starting value
+vectors must match the number of parameters in the model.}
+
 \item{progress}{boolean, show progress bar? Defaults to TRUE.}
 }
 \value{
@@ -54,7 +70,7 @@ are the named parameters.
 \description{
 Fit a higher-order item response theory model under the generalized 
 partial credit measurement model. The goal is to explain multiple latent dimensions
-by a single higher-order dimension. We extend this model to perform regression 
+by a single higher-order dimension. We extend this model with an option to perform regression 
 on the general latent dimension.
 }
 \examples{
@@ -132,13 +148,20 @@ xdat$s.lam.cor
 th = summary(mod, param = "theta", dimension = 1)
 cor(th, xdat$theta[,1])
 
-plot(mod, "lambda1")
-plot(mod, "lambda2")
-plot(mod, "lambda3")
-plot(mod, "a1")
-plot(mod, "mud")
-plot(mod, "d2")
-plot(mod, "beta1")
+plot(mod, "lambda1", type = "trace")
+plot(mod, "lambda2", type = "trace")
+plot(mod, "lambda3", type = "trace")
+plot(mod, "a1", type = "trace")
+plot(mod, "d2", type = "trace")
+plot(mod, "beta1", type = "trace")
+
+plot(mod, 1, type = "icc")
+plot(mod, 2, type = "icc")
+plot(mod, 3, type = "icc")
+plot(mod, 4, type = "icc")
+plot(mod, 5, type = "icc")
+plot(mod, 6, type = "icc")
+plot(mod, 7, type = "icc", min = -10, max = 10)
 
 # example 
 data("asti")

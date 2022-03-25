@@ -2,7 +2,7 @@
 #' 
 #' Fit a higher-order item response theory model under the generalized 
 #' partial credit measurement model. The goal is to explain multiple latent dimensions
-#' by a single higher-order dimension. We extend this model to perform regression 
+#' by a single higher-order dimension. We extend this model with an option to perform regression 
 #' on the general latent dimension.
 #'
 #' @param x matrix of item responses. Responses must be integers where the 
@@ -25,6 +25,23 @@
 #' @param burn number of burn in iterations.
 #' @param delta tuning parameter for Metropolis-Hanstings algorithm. Alter 
 #' delta until acceptance.ratio =~ 0.234.
+#' @param type type of Partial Credit Model to fit. If the partial credit model
+#' is desired (i.e. all alpha parameters = 1), then choose `type = "1p"`.
+#' If the Generalized Parial Credit Model is desired, then choose
+#' `type = "2p"`. The default is `type = "2p"`.
+#' @param start starting values for the Metropolis-Hastings algorithm. 
+#' Provide a `list` with the following named arguments:
+#' `list(lambda = c(), theta = c(), delta = c(), alpha = c(), beta = c())`
+#' \itemize{
+#'   \item{lambda - }{vector of starting values for the latent factor loadings.}
+#'   \item{theta - }{vector of starting values for the abilities.}
+#'   \item{delta - }{vector of starting values for the difficulties.}
+#'   \item{alpha - }{vector of starting values for the slope parameters.}
+#'   \item{beta - }{vector of starting values for the latent regression parameters}
+#' }
+#' If you choose specify starting values, then the lengths of the starting value
+#' vectors must match the number of parameters in the model.
+#' 
 #' @param progress boolean, show progress bar? Defaults to TRUE.
 #'
 #'
@@ -106,13 +123,20 @@
 #' th = summary(mod, param = "theta", dimension = 1)
 #' cor(th, xdat$theta[,1])
 #' 
-#' plot(mod, "lambda1")
-#' plot(mod, "lambda2")
-#' plot(mod, "lambda3")
-#' plot(mod, "a1")
-#' plot(mod, "mud")
-#' plot(mod, "d2")
-#' plot(mod, "beta1")
+#' plot(mod, "lambda1", type = "trace")
+#' plot(mod, "lambda2", type = "trace")
+#' plot(mod, "lambda3", type = "trace")
+#' plot(mod, "a1", type = "trace")
+#' plot(mod, "d2", type = "trace")
+#' plot(mod, "beta1", type = "trace")
+#' 
+#' plot(mod, 1, type = "icc")
+#' plot(mod, 2, type = "icc")
+#' plot(mod, 3, type = "icc")
+#' plot(mod, 4, type = "icc")
+#' plot(mod, 5, type = "icc")
+#' plot(mod, 6, type = "icc")
+#' plot(mod, 7, type = "icc", min = -10, max = 10)
 #' 
 #' # example 
 #' data("asti")
@@ -250,7 +274,9 @@ hlt = function(x,
     lJ = apply(x, 2, function(x) {length(unique(x))})
     nD = max(lJ) - 1
     
-    if(!is.null(z)) {
+    isZ = !is.null(z)
+    
+    if(isZ) {
       if(!is.matrix(z)) {
         z = as.matrix(z)
       }
@@ -267,10 +293,8 @@ hlt = function(x,
                        paste0("beta", 1:nB))
         
         post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = c(runif((nT - 1), 0, 1.9),
-                      rep(rnorm(n, 0, 1), nT),
-                      rep(rnorm(nD*J, 0.2, 1)), 
-                      rnorm(nB, 0, 1))
+        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                              nD = nD, J = J, nB = nB)
         
       } else if(type == "2p") { 
         
@@ -283,11 +307,8 @@ hlt = function(x,
                        paste0("beta", 1:nB))
         
         post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = c(runif((nT - 1), 0, 1.9),
-                      rep(rnorm(n, 0, 1), nT),
-                      rep(rnorm(nD*J, 0.2, 1)), 
-                      runif(J, 0.5, 1),
-                      rnorm(nB, 0, 1))
+        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                              nD = nD, J = J, nB = nB)
       
       }
       
@@ -304,9 +325,8 @@ hlt = function(x,
                        as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})))
         
         post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = c(runif((nT - 1), 0, 1.9),
-                      rep(rnorm(n, 0, 1), nT),
-                      rep(rnorm(nD*J, 0.2, 1)))
+        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                              nD = nD, J = J, nB = nB)
         
       } else if(type == "2p") {
         
@@ -319,10 +339,8 @@ hlt = function(x,
                        paste0("a", 1:J))
         
         post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = c(runif((nT - 1), 0, 1.9),
-                      rep(rnorm(n, 0, 1), nT),
-                      rep(rnorm(nD*J, 0.2, 1)), 
-                      runif(J, 0.5, 1))
+        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                              nD = nD, J = J, nB = nB)
         
         
       }

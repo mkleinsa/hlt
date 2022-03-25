@@ -26,21 +26,14 @@ get_theme = function() {
         axis.text.y = element_text(size = 10),
         axis.title.x = element_text(size = 15, margin = margin(t = 12, r = 0, b = 0, l = 0)),
         axis.title.y = element_text(size = 15, margin = margin(t = 0, r = 12, b = 0, l = 0)),
-        plot.margin = margin(10, 15, 10, 10),
-        aspect.ratio = .85,
         legend.background = element_rect(linetype = 1, size = 0.5, colour = 1))
 }
 
 plot.hltObj.icc = function(mod, x, type, ...) {
   args = list(...)
   if(type == "icc") {
-    plt = icc_curve(mod, x,
-                    min = ifelse(is.null(args$min), -4, args$min),
+    plt = icc_curve(mod, x, min = ifelse(is.null(args$min), -4, args$min),
                     max = ifelse(is.null(args$max), 4, args$max))
-  } else if(type == "iic") {
-    
-  } else if(type == "tic") {
-    
   }
   return(plt)
 }
@@ -62,7 +55,11 @@ icc_curve = function(mod, x, min = -4, max = 4) {
       1 / (1 + exp(-alpha[x] * (theta - kappa_list[[x]])))
     })))
   }
-  pdata = data.frame(x = seq(min, max, by = 0.1), y = t(sapply(seq(min, max, by = 0.1), pxk)))
+  if(length(kappa_list[[x]]) == 1) {
+    pdata = data.frame(x = seq(min, max, by = 0.1), y = sapply(seq(min, max, by = 0.1), pxk))
+  } else {
+    pdata = data.frame(x = seq(min, max, by = 0.1), y = t(sapply(seq(min, max, by = 0.1), pxk)))
+  }
   kappa_nms = names(kappa_list[[x]])
   names(pdata) = c("x", kappa_nms)
   pdata = tidyr::pivot_longer(pdata, cols = kappa_nms)
