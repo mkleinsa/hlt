@@ -94,6 +94,7 @@ plot(mod, 7, type = "icc", min = -10, max = 10)
 
 summary(mod, param = "beta")
 summary(mod, param = "lambda")
+summary(mod, param = "cor.theta")
 summary(mod, param = "alpha")
 summary(mod, param = "delta")
 summary(mod, param = "theta", dimension = 1)
