@@ -38,6 +38,7 @@ plot.hltObj.icc = function(mod, x, type, ...) {
   return(plt)
 }
 
+#' @importFrom tidyr pivot_longer
 icc_curve = function(mod, x, min = -4, max = 4) {
   if(any(grepl("^[a]", colnames(mod$post)))) {
     alpha = as.vector(summary(mod, param = "alpha")["mean",])
