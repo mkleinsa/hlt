@@ -1,6 +1,7 @@
 #define RCPPDIST_DONT_USE_ARMA
 #include <RcppDist.h>
 using namespace Rcpp;
+// [[Rcpp::plugins(cpp11)]]
 // [[Rcpp::depends(Rcpp, RcppDist)]]
 // [[Rcpp::depends(RcppProgress)]]
 #include <progress.hpp>
@@ -44,7 +45,7 @@ double lgp2PR(IntegerMatrix & x,
   
   for(int i = 0; i < n; i++) {
     for(int j = 0; j < J; j++) {
-      NumericVector r = cumsum((theta_mat(i, tJ(j)) - d2(_, j)) * a(j));
+      NumericVector r = cumsum((theta_mat(i, tJ(j)) * a(j)) - d2(_, j));
       NumericVector er = exp(r);
       NumericVector pr = er / Rcpp::sum(er);
       int xval = x(i, j);
@@ -97,9 +98,14 @@ double lt2PR(IntegerMatrix & x,
              int burn,
              double delta,
              NumericMatrix & post,
+             NumericVector & mean_theta,
+             NumericVector & mean_theta_sq,
+             NumericMatrix & draw,
+             NumericMatrix & draw_theta,
              NumericVector ix,
              NumericVector ixe,
              int npar,
+             int ntheta,
              int n,
              int nB,
              int J,
@@ -107,76 +113,82 @@ double lt2PR(IntegerMatrix & x,
              NumericVector lJ,
              int nT,
              NumericVector tJ,
-             NumericMatrix & corr_theta,
              NumericVector & accept,
              double eps,
              bool display_progress = true) {
   
   Progress p(iter, display_progress);
   
-  NumericVector oldpars = post(0, _ );
+  NumericVector oldpars = draw(0, _ );
+  NumericVector oldpars_theta = draw_theta(0, _ );
 
   for(int it = 1; it < iter; it++) {
     NumericVector prop = Rcpp::rnorm(npar, 0.0, delta);
     NumericVector newpars = oldpars + prop;
     
-    for(int q = ix(3) - 1; q < ixe(3); q ++){
+    NumericVector prop_theta = Rcpp::rnorm(ntheta, 0.0, delta);
+    NumericVector newpars_theta = oldpars_theta + prop_theta;
+    
+    for(int q = ix(2) - 1; q < ixe(2); q ++){
       oldpars(q) = abs2(oldpars(q));
       newpars(q) = abs2(newpars(q));
     }
-
+    
     double numer = lgp2PR(x,
-                         z,
-                         newpars[Range(ix(0) - 1, ixe(0) - 1)],
-                         nB,
-                         nT,
-                         n,
-                         J,
-                         tJ,
-                         nDmax,
-                         lJ,
-                         newpars[Range(ix(1) - 1, ixe(1) - 1)],
-                         newpars[Range(ix(2) - 1, ixe(2) - 1)],
-                         newpars[Range(ix(3) - 1, ixe(3) - 1)],
-                         newpars[Range(ix(4) - 1, ixe(4) - 1)],
-                         eps);
+                          z,
+                          newpars[Range(ix(0) - 1, ixe(0) - 1)],
+                          nB,
+                          nT,
+                          n,
+                          J,
+                          tJ,
+                          nDmax,
+                          lJ,
+                          newpars_theta,
+                          newpars[Range(ix(1) - 1, ixe(1) - 1)],
+                          newpars[Range(ix(2) - 1, ixe(2) - 1)],
+                          newpars[Range(ix(3) - 1, ixe(3) - 1)],
+                          eps);
 
     double denom = lgp2PR(x,
-                         z,
-                         oldpars[Range(ix(0) - 1, ixe(0) - 1)],
-                         nB,
-                         nT,
-                         n,
-                         J,
-                         tJ,
-                         nDmax,
-                         lJ,
-                         oldpars[Range(ix(1) - 1, ixe(1) - 1)],
-                         oldpars[Range(ix(2) - 1, ixe(2) - 1)],
-                         oldpars[Range(ix(3) - 1, ixe(3) - 1)],
-                         oldpars[Range(ix(4) - 1, ixe(4) - 1)],
-                         eps);
-
+                          z,
+                          oldpars[Range(ix(0) - 1, ixe(0) - 1)],
+                          nB,
+                          nT,
+                          n,
+                          J,
+                          tJ,
+                          nDmax,
+                          lJ,
+                          oldpars_theta,
+                          oldpars[Range(ix(1) - 1, ixe(1) - 1)],
+                          oldpars[Range(ix(2) - 1, ixe(2) - 1)],
+                          oldpars[Range(ix(3) - 1, ixe(3) - 1)],
+                          eps);
+    
     double acceptp = std::exp(numer - denom);
     double acceptit = (acceptp > R::runif(0.0, 1.0));
     
     if(acceptit == true) {
       oldpars = newpars;
+      oldpars_theta = newpars_theta;
       if(it >= burn) {
         post(it - burn, _ ) = newpars;
+        mean_theta = mean_theta + newpars_theta;
+        mean_theta_sq = mean_theta_sq + (newpars_theta * newpars_theta);
       }
       accept[it] = 1;
     } else {
       if(it >= burn) {
         post(it - burn, _ ) = oldpars;
+        mean_theta = mean_theta + oldpars_theta;
+        mean_theta_sq = mean_theta_sq + (oldpars_theta * oldpars_theta);
       }
       accept[it] = 0;
     }
     
     p.increment();
   }
-  
-  standardize_lambda(post, ix(1) - 1, ixe(1) - 1, nT, n, corr_theta);
   
   return 1.0;
 }

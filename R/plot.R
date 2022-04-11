@@ -3,15 +3,32 @@
 #' @exportS3Method plot hltObj
 plot.hltObj = function(x, ...) {
   args = list(...)
-  type = args$type
-  param = args$param 
+  if("type" %in% names(args)) {
+    type = args$type
+  }
+  if("param" %in% names(args)) {
+    param = args$param
+  }
+  if("item" %in% names(args)) {
+    item = args$item
+  }
+  if("min" %in% names(args)) {
+    min = args$min
+  } else {
+    min = -4
+  }
+  if("max" %in% names(args)) {
+    max = args$max
+  } else {
+    max = 4
+  }
   post = x$post
   nr = nrow(post)
   if(type == "trace") {
     ggplot(data.frame(param = 1:nr, y = post[, param]), aes(param, y)) + geom_line() + 
       xlab("iteration") + ylab("value") + get_theme()
   } else if(type == "icc") {
-    plot.hltObj.icc(x, x = param, type = type, ...)
+    plot.hltObj.icc(x, item = item, type = type, min = min, max = max)
   }
 }
 
@@ -32,11 +49,9 @@ get_theme = function() {
         legend.background = element_rect(linetype = 1, size = 0.5, colour = 1))
 }
 
-plot.hltObj.icc = function(mod, x, type, ...) {
-  args = list(...)
+plot.hltObj.icc = function(mod, item, type, min, max) {
   if(type == "icc") {
-    plt = icc_curve(mod, x, min = ifelse(is.null(args$min), -4, args$min),
-                    max = ifelse(is.null(args$max), 4, args$max))
+    plt = icc_curve(mod, item, min = min, max = max)
   }
   return(plt)
 }
@@ -44,9 +59,9 @@ plot.hltObj.icc = function(mod, x, type, ...) {
 #' @importFrom tidyr pivot_longer
 icc_curve = function(mod, x, min = -4, max = 4) {
   if(any(grepl("^[a]", colnames(mod$post)))) {
-    alpha = as.vector(summary(mod, param = "alpha")["mean",])
+    alpha = as.vector(summary(mod, param = "alpha", digits = 2, transpose = FALSE)["mean",])
   }
-  kappa = summary(mod, param = "delta")["mean",]
+  kappa = summary(mod, param = "delta", digits = 2, transpose = FALSE)["mean",]
   kappa_names = names(kappa)
   kappa_id = as.numeric(gsub(".*[d]([^.]+)[_].*", "\\1", kappa_names))
   kappa_list = vector(length = length(unique(kappa_id)), mode = "list")
@@ -54,9 +69,11 @@ icc_curve = function(mod, x, min = -4, max = 4) {
     kappa_list[[i]] = kappa[kappa_id == i]
   }
   pxk = function(theta) {
-    stat = "mean"
+    #stat = "mean"
     return(as.numeric(sapply(theta, function(theta) {
-      1 / (1 + exp(-alpha[x] * (theta - kappa_list[[x]])))
+      cum_sum = exp(cumsum((alpha[x] * theta) - kappa_list[[x]]))
+      par_cum_sum = cumsum(cum_sum)
+      cum_sum / (1 + par_cum_sum)
     })))
   }
   if(length(kappa_list[[x]]) == 1) {

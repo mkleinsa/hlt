@@ -1,4 +1,5 @@
-#' Higher-Order Item Response Theory (Latent Trait Theory) with Regression
+#' Explanatory and Descriptive Higher-Order Item Response Theory 
+#' (Latent Trait Theory)
 #' 
 #' Fit a higher-order item response theory model under the generalized 
 #' partial credit measurement model. The goal is to explain multiple latent dimensions
@@ -73,6 +74,41 @@
 #' 
 #' mod$accept.rate # ideally 0.234
 #' 
+#' plot(mod, param = "lambda1", type = "trace")
+#' plot(mod, param = "lambda2", type = "trace")
+#' plot(mod, param = "lambda3", type = "trace")
+#' plot(mod, param = "a1", type = "trace")
+#' plot(mod, param = "d2", type = "trace")
+#' plot(mod, param = "beta1", type = "trace")
+#' 
+#' plot(mod, item = 1, type = "icc")
+#' plot(mod, item = 2, type = "icc")
+#' plot(mod, item = 3, type = "icc")
+#' plot(mod, item = 4, type = "icc")
+#' plot(mod, item = 5, type = "icc")
+#' plot(mod, item = 6, type = "icc")
+#' plot(mod, item = 7, type = "icc", min = -10, max = 10)
+#' 
+#' summary(mod, param = "all")
+#' summary(mod, param = "delta", digits = 2)
+#' summary(mod, param = "lambda")
+#' summary(mod, param = "alpha")
+#' summary(mod, param = "delta")
+#' summary(mod, param = "theta", dimension = 1)
+#' summary(mod, param = "theta", dimension = 2)
+#' summary(mod, param = "theta", dimension = 3)
+#' summary(mod, param = "theta", dimension = 4)
+#' 
+#' # start from a previous run's solution
+#' post = tail(mod$post, 1)
+#' start = list(lambda = post[1, c("lambda1", "lambda2", "lambda3", "lambda4", "lambda5")],
+#'              theta = mod$theta_mean, 
+#'              delta = post[1, grepl("^[d]", colnames(post))], 
+#'              alpha = post[1, paste0("a", 1:25)], 
+#'              beta = post[1, c("beta1", "beta2")])
+#'              
+#' mod = hlt(x, z = z, id = id, start = start, iter = 500, burn = 250, delta = 0.002)
+#' 
 #' @importFrom stats cor quantile rnorm runif sd
 #' @useDynLib hlt, .registration=TRUE
 #' @importFrom Rcpp evalCpp
@@ -126,20 +162,44 @@ hlt = function(x,
       
       if(type == "1p") {
         
-        npar = n*nT + (nT - 1) + nD*J + nB
+        npar_theta = n*nT
+        npar = (nT - 1) + nD*J + nB
+        npar_total = npar + npar_theta
+        
+        draw = matrix(nrow = 1, ncol = npar)
+        draw_theta = matrix(nrow = 1, ncol = npar_theta)
+        
+        theta_mean = matrix(0, nrow = 1, ncol = npar_theta)
+        theta_mean_sq = matrix(0, nrow = 1, ncol = npar_theta)
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
                        as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})),
                        paste0("beta", 1:nB))
         
-        post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
-                              nD = nD, J = J, nB = nB)
+        post_names_theta = post_names[grepl("theta", post_names)]
+        post_names_no_theta = post_names[!grepl("theta", post_names)]
         
-      } else if(type == "2p") { 
+        post = matrix(0, nrow = iter - burn, ncol = npar)
+        colnames(post) = post_names_no_theta
         
-        npar = n*nT + (nT - 1) + J + nD*J + nB
+        start_values = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                                 nD = nD, J = J, nB = nB)
+        
+        draw[1, ] = start_values[post_names %in% post_names_no_theta]
+        draw_theta[1, ] = start_values[post_names %in% post_names_theta]
+        
+      } else if(type == "2p") {
+        
+        npar_theta = n*nT
+        npar = (nT - 1) + J + nD*J + nB
+        npar_total = npar + npar_theta
+        
+        draw = matrix(nrow = 1, ncol = npar)
+        draw_theta = matrix(nrow = 1, ncol = npar_theta)
+        
+        theta_mean = matrix(0, nrow = 1, ncol = npar_theta)
+        theta_mean_sq = matrix(0, nrow = 1, ncol = npar_theta)
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
@@ -147,12 +207,19 @@ hlt = function(x,
                        paste0("a", 1:J),
                        paste0("beta", 1:nB))
         
-        post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
-                              nD = nD, J = J, nB = nB)
-      
+        post_names_theta = post_names[grepl("theta", post_names)]
+        post_names_no_theta = post_names[!grepl("theta", post_names)]
+        
+        post = matrix(0, nrow = iter - burn, ncol = npar)
+        colnames(post) = post_names_no_theta
+        
+        start_values = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                                 nD = nD, J = J, nB = nB)
+        
+        draw[1, ] = start_values[post_names %in% post_names_no_theta]
+        draw_theta[1, ] = start_values[post_names %in% post_names_theta]
+        
       }
-      
       
     } 
     else {
@@ -169,34 +236,73 @@ hlt = function(x,
         post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
                               nD = nD, J = J, nB = nB)
         
+        #----
+        npar_theta = n*nT
+        npar = (nT - 1) + nD*J
+        npar_total = npar + npar_theta
+        
+        draw = matrix(nrow = 1, ncol = npar)
+        draw_theta = matrix(nrow = 1, ncol = npar_theta)
+        
+        theta_mean = matrix(0, nrow = 1, ncol = npar_theta)
+        theta_mean_sq = matrix(0, nrow = 1, ncol = npar_theta)
+        
+        post_names = c(paste0("lambda", 1:(nT - 1)),
+                       as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
+                       as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})))
+        
+        post_names_theta = post_names[grepl("theta", post_names)]
+        post_names_no_theta = post_names[!grepl("theta", post_names)]
+        
+        post = matrix(0, nrow = iter - burn, ncol = npar)
+        colnames(post) = post_names_no_theta
+        
+        start_values = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                                 nD = nD, J = J, nB = nB)
+        
+        draw[1, ] = start_values[post_names %in% post_names_no_theta]
+        draw_theta[1, ] = start_values[post_names %in% post_names_theta]
+        
       } else if(type == "2p") {
         
+        npar_theta = n*nT
+        npar = (nT - 1) + J + nD*J
+        npar_total = npar + npar_theta
         
-        npar = n*nT + (nT - 1) + J + nD*J
+        draw = matrix(nrow = 1, ncol = npar)
+        draw_theta = matrix(nrow = 1, ncol = npar_theta)
+        
+        theta_mean = matrix(0, nrow = 1, ncol = npar_theta)
+        theta_mean_sq = matrix(0, nrow = 1, ncol = npar_theta)
         
         post_names = c(paste0("lambda", 1:(nT - 1)),
                        as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
                        as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})),
                        paste0("a", 1:J))
         
-        post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
-                              nD = nD, J = J, nB = nB)
+        post_names_theta = post_names[grepl("theta", post_names)]
+        post_names_no_theta = post_names[!grepl("theta", post_names)]
         
+        post = matrix(0, nrow = iter - burn, ncol = npar)
+        colnames(post) = post_names_no_theta
+        
+        start_values = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
+                                 nD = nD, J = J, nB = nB)
+        
+        draw[1, ] = start_values[post_names %in% post_names_no_theta]
+        draw_theta[1, ] = start_values[post_names %in% post_names_theta]
         
       }
     }
     
-    c.ix = calc.ix(post_names, npar)
+    c.ix = calc.ix(post_names_no_theta, npar)
     ix = c.ix$ix
     ixe = c.ix$ixe
     
     accept = numeric(iter)
     accept[1] = 1
     
-    corr_theta = matrix(data = 0, nrow = iter - burn, ncol = nT - 1)
-    
-    if(!is.null(z)) {
+    if(isZ) {
       if(type == "1p") {
         if(ntheta == 2) {
           lt1PR2D(x = x,
@@ -205,9 +311,14 @@ hlt = function(x,
                   burn = burn,
                   delta = delta,
                   post = post,
+                  mean_theta = theta_mean,
+                  mean_theta_sq = theta_mean_sq,
+                  draw = draw,
+                  draw_theta = draw_theta,
                   ix = ix,
                   ixe = ixe,
                   npar = npar,
+                  ntheta = n * nT,
                   n = n,
                   nB = nB,
                   J = J,
@@ -215,7 +326,6 @@ hlt = function(x,
                   lJ = lJ,
                   nT = nT,
                   tJ = id,
-                  corr_theta = corr_theta,
                   accept = accept,
                   eps = .Machine$double.eps,
                   display_progress = progress)
@@ -226,9 +336,14 @@ hlt = function(x,
                 burn = burn,
                 delta = delta,
                 post = post,
+                mean_theta = theta_mean,
+                mean_theta_sq = theta_mean_sq,
+                draw = draw,
+                draw_theta = draw_theta,
                 ix = ix,
                 ixe = ixe,
                 npar = npar,
+                ntheta = n * nT,
                 n = n,
                 nB = nB,
                 J = J,
@@ -236,7 +351,6 @@ hlt = function(x,
                 lJ = lJ,
                 nT = nT,
                 tJ = id,
-                corr_theta = corr_theta,
                 accept = accept,
                 eps = .Machine$double.eps,
                 display_progress = progress)
@@ -249,9 +363,14 @@ hlt = function(x,
                   burn = burn,
                   delta = delta,
                   post = post,
+                  mean_theta = theta_mean,
+                  mean_theta_sq = theta_mean_sq,
+                  draw = draw,
+                  draw_theta = draw_theta,
                   ix = ix,
                   ixe = ixe,
                   npar = npar,
+                  ntheta = n * nT,
                   n = n,
                   nB = nB,
                   J = J,
@@ -259,7 +378,6 @@ hlt = function(x,
                   lJ = lJ,
                   nT = nT,
                   tJ = id,
-                  corr_theta = corr_theta,
                   accept = accept,
                   eps = .Machine$double.eps,
                   display_progress = progress)
@@ -270,9 +388,14 @@ hlt = function(x,
                 burn = burn,
                 delta = delta,
                 post = post,
+                mean_theta = theta_mean,
+                mean_theta_sq = theta_mean_sq,
+                draw = draw,
+                draw_theta = draw_theta,
                 ix = ix,
                 ixe = ixe,
                 npar = npar,
+                ntheta = n * nT,
                 n = n,
                 nB = nB,
                 J = J,
@@ -280,7 +403,6 @@ hlt = function(x,
                 lJ = lJ,
                 nT = nT,
                 tJ = id,
-                corr_theta = corr_theta,
                 accept = accept,
                 eps = .Machine$double.eps,
                 display_progress = progress)
@@ -295,16 +417,20 @@ hlt = function(x,
                    burn = burn,
                    delta = delta,
                    post = post,
+                   mean_theta = theta_mean,
+                   mean_theta_sq = theta_mean_sq,
+                   draw = draw,
+                   draw_theta = draw_theta,
                    ix = ix,
                    ixe = ixe,
                    npar = npar,
+                   ntheta = n * nT,
                    n = n,
                    J = J,
                    nDmax = nD,
                    lJ = lJ,
                    nT = nT,
                    tJ = id,
-                   corr_theta = corr_theta,
                    accept = accept,
                    eps = .Machine$double.eps,
                    display_progress = progress)
@@ -314,16 +440,20 @@ hlt = function(x,
                  burn = burn,
                  delta = delta,
                  post = post,
+                 mean_theta = theta_mean,
+                 mean_theta_sq = theta_mean_sq,
+                 draw = draw,
+                 draw_theta = draw_theta,
                  ix = ix,
                  ixe = ixe,
                  npar = npar,
+                 ntheta = n * nT,
                  n = n,
                  J = J,
                  nDmax = nD,
                  lJ = lJ,
                  nT = nT,
                  tJ = id,
-                 corr_theta = corr_theta,
                  accept = accept,
                  eps = .Machine$double.eps,
                  display_progress = progress)
@@ -335,16 +465,20 @@ hlt = function(x,
                    burn = burn,
                    delta = delta,
                    post = post,
+                   mean_theta = theta_mean,
+                   mean_theta_sq = theta_mean_sq,
+                   draw = draw,
+                   draw_theta = draw_theta,
                    ix = ix,
                    ixe = ixe,
                    npar = npar,
+                   ntheta = n * nT,
                    n = n,
                    J = J,
                    nDmax = nD,
                    lJ = lJ,
                    nT = nT,
                    tJ = id,
-                   corr_theta = corr_theta,
                    accept = accept,
                    eps = .Machine$double.eps,
                    display_progress = progress)
@@ -354,16 +488,20 @@ hlt = function(x,
                  burn = burn,
                  delta = delta,
                  post = post,
+                 mean_theta = theta_mean,
+                 mean_theta_sq = theta_mean_sq,
+                 draw = draw,
+                 draw_theta = draw_theta,
                  ix = ix,
                  ixe = ixe,
                  npar = npar,
+                 ntheta = n * nT,
                  n = n,
                  J = J,
                  nDmax = nD,
                  lJ = lJ,
                  nT = nT,
                  tJ = id,
-                 corr_theta = corr_theta,
                  accept = accept,
                  eps = .Machine$double.eps,
                  display_progress = progress)
@@ -374,7 +512,7 @@ hlt = function(x,
     d_end = cumsum(rep(nD, J))
     d_start = d_end - nD + 1
     d_00 = max(lJ - 1) - (lJ - 1)
-    d_null = d_end[d_00 > 0] + ix[3]
+    d_null = d_end[d_00 > 0] + ix[2]
     d_null_start = d_null - d_00[d_00 > 0]
     d_null = d_null - 1
     if(length(d_null) > 0) {
@@ -383,13 +521,20 @@ hlt = function(x,
       }
     }
     
+    theta_mean = theta_mean[1, ] / (iter - burn)
+    theta_mean_sq = theta_mean_sq[1, ] / (iter - burn)
+    theta_sd = sqrt(theta_mean_sq - (theta_mean^2))
+    
     colnames(x) = paste0("x", 1:J)
-    colnames(post) = post_names
     
     accept.rate = mean(accept)
     
-    result = list(post = post, accept = accept, accept.rate = accept.rate,
-                  corr_theta = corr_theta)
+    theta = data.frame(mean = theta_mean, sd = theta_sd)
+    
+    result = list(post = post, 
+                  accept.rate = accept.rate, 
+                  theta = theta,
+                  nT = nT)
     
     class(result) = c("hltObj")
     return(result)

@@ -2,7 +2,8 @@
 % Please edit documentation in R/hlt.R
 \name{hlt}
 \alias{hlt}
-\title{Higher-Order Item Response Theory (Latent Trait Theory) with Regression}
+\title{Explanatory and Descriptive Higher-Order Item Response Theory 
+(Latent Trait Theory)}
 \usage{
 hlt(
   x,
@@ -97,5 +98,40 @@ id = c(0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,3,3,3,4,4,4,4,4,4)
 mod = hlt(x, z = z, id = id, iter = 20, burn = 10, delta = 0.002)
 
 mod$accept.rate # ideally 0.234
+
+plot(mod, param = "lambda1", type = "trace")
+plot(mod, param = "lambda2", type = "trace")
+plot(mod, param = "lambda3", type = "trace")
+plot(mod, param = "a1", type = "trace")
+plot(mod, param = "d2", type = "trace")
+plot(mod, param = "beta1", type = "trace")
+
+plot(mod, item = 1, type = "icc")
+plot(mod, item = 2, type = "icc")
+plot(mod, item = 3, type = "icc")
+plot(mod, item = 4, type = "icc")
+plot(mod, item = 5, type = "icc")
+plot(mod, item = 6, type = "icc")
+plot(mod, item = 7, type = "icc", min = -10, max = 10)
+
+summary(mod, param = "all")
+summary(mod, param = "delta", digits = 2)
+summary(mod, param = "lambda")
+summary(mod, param = "alpha")
+summary(mod, param = "delta")
+summary(mod, param = "theta", dimension = 1)
+summary(mod, param = "theta", dimension = 2)
+summary(mod, param = "theta", dimension = 3)
+summary(mod, param = "theta", dimension = 4)
+
+# start from a previous run's solution
+post = tail(mod$post, 1)
+start = list(lambda = post[1, c("lambda1", "lambda2", "lambda3", "lambda4", "lambda5")],
+             theta = mod$theta_mean, 
+             delta = post[1, grepl("^[d]", colnames(post))], 
+             alpha = post[1, paste0("a", 1:25)], 
+             beta = post[1, c("beta1", "beta2")])
+             
+mod = hlt(x, z = z, id = id, start = start, iter = 500, burn = 250, delta = 0.002)
 
 }

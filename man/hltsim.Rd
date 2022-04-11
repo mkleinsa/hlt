@@ -4,21 +4,7 @@
 \alias{hltsim}
 \title{Simulate the HLT model}
 \usage{
-hltsim(
-  n,
-  ntheta,
-  lambda,
-  tJ,
-  dL,
-  mua,
-  mud,
-  siga,
-  sigd,
-  regression = FALSE,
-  z = NULL,
-  nB,
-  beta = NULL
-)
+hltsim(type, n, ntheta, lambda, id, dL, nB, beta = NULL)
 }
 \arguments{
 \item{n}{number of observations}
@@ -27,9 +13,13 @@ hltsim(
 
 \item{lambda}{latent factor coefficients}
 
-\item{tJ}{number of questions}
+\item{id}{number of questions}
 
 \item{dL}{number of levels for each question}
+
+\item{nB}{number of regression parameters. nB = ncol(z).}
+
+\item{beta}{what value to set the regression parameters.}
 
 \item{mua}{mean of the alphas}
 
@@ -42,11 +32,18 @@ hltsim(
 \item{regression}{TRUE/FALSE. Simulate regression model?}
 
 \item{z}{regression design matrix.}
-
-\item{nB}{number of regression parameters. nB = ncol(z).}
-
-\item{beta}{what value to set the regression parameters.}
 }
 \description{
 Simulate the HLT model
+}
+\examples{
+
+# PCM, No regression, 4 dimensions
+xdat = hltsim(type = "1p", n = 250, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
+              id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+                     3,3,3,3,3,3), dL = 2)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+          3,3,3,3,3,3), iter = 200, burn = 100, delta = 0.013)
+
 }
