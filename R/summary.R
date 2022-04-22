@@ -3,6 +3,7 @@ summary.hltObj = function(object, ...) {
   args = list(...)
   param = args$param
   dimension = args$dimension
+  nT = object$nT
   if("digits" %in% names(args)) {
     digits = args$digits
   } else {
@@ -13,21 +14,23 @@ summary.hltObj = function(object, ...) {
   } else {
     transpose = TRUE
   }
-  cor.theta = args$cor.theta
   post = object$post
   nms = colnames(post)
   if (param == "all") {
     smry = apply(post, 2, smy, digits = digits)
   } else if (param == "lambda") {
     smry = apply(post[, grepl("lambda", nms), drop = FALSE], 2, smy, digits = digits)
+    cor_mat = matrix(data = NA, nrow = nrow(object$theta), ncol = nT)
+    for(i in 1:nT) {
+      cor_mat[, i] = summary.hltObj(object, param = "theta", dimension = i)[, 1]
+    }
+    smry = rbind(smry, std.mean = round(cor(cor_mat)[1:(nT - 1), nT], digits = digits))
   } else if (param == "alpha") {
     smry = apply(post[, grepl("^[a]", nms), drop = FALSE], 2, smy, digits = digits)
   } else if (param == "delta") {
     smry = apply(post[, grepl("^[d]", nms), drop = FALSE], 2, smy, digits = digits)
   } else if (param == "beta") {
     smry = apply(post[, grepl("beta", nms), drop = FALSE], 2, smy, digits = digits)
-  } else if (param == "cor.theta") {
-    smry = apply(object$corr_theta, 2, smy, digits = digits)
   } else if (param == "theta") {
     if("dimension" %in% names(args)) {
       dimension = args$dimension
@@ -37,7 +40,7 @@ summary.hltObj = function(object, ...) {
               for the general latent dimension.")
       dimension = nT
     }
-    total_theta = nrow(mod$theta)
+    total_theta = nrow(object$theta)
     n_per_theta = total_theta / nT
     n_per_theta * dimension
     smry = t(object$theta[((n_per_theta * (dimension - 1)) + 1):(n_per_theta * dimension), ])

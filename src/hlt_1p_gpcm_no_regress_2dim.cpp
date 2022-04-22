@@ -63,10 +63,10 @@ double lgp1PNR2D(IntegerMatrix & x,
     llk = llk + std::log(R::dnorm(thetagt, 0.0, 1.0, false) + eps);
   }
   
-  for(int l = 0; l < nT - 1; l++) {
-    double lambdal = lambda(l);
+  //for(int l = 0; l < nT - 1; l++) {
+    double lambdal = lambda(0);
     llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
-  }
+  //}
   
   return llk;
 }

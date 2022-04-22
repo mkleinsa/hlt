@@ -13,7 +13,8 @@ hlt(
   burn = iter/2,
   delta,
   type = "2p",
-  start = list(lambda = c(), theta = c(), delta = c(), alpha = c(), beta = c()),
+  start = list(list(lambda = c(), theta = c(), delta = c(), alpha = c(), beta = c())),
+  nchains = 1,
   progress = TRUE
 )
 }

@@ -37,13 +37,76 @@ hltsim(type, n, ntheta, lambda, id, dL, nB, beta = NULL)
 Simulate the HLT model
 }
 \examples{
+# PCM, No regression, 2 dimensions, binary response
+xdat = hltsim(type = "1p", n = 50, ntheta = 2, lambda = c(0.5, 0.5), 
+              id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), dL = 2)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, id = xdat$id, iter = 5e5, burn = 3e5, type = "1p", 
+          delta = 0.1)
+          
+# PCM, No regression, 3 dimensions, binary response
+xdat = hltsim(type = "1p", n = 200, ntheta = 3, lambda = c(0.2, 0.2, 0.1), 
+              id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2), dL = 2)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, id = xdat$id, iter = 5e5, burn = 3e5, type = "1p", 
+          delta = 0.04)
+
+# PCM, No regression, 2 dimensions
+xdat = hltsim(n = n, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = NULL)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), 
+          iter = 200, burn = 100, delta = 0.013)
 
 # PCM, No regression, 4 dimensions
-xdat = hltsim(type = "1p", n = 250, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
-              id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
-                     3,3,3,3,3,3), dL = 2)
+type, n, ntheta, lambda, id, dL, nB, beta = NULL
+xdat = hltsim(type = "1p", n = 50, ntheta = 2, lambda = c(0.5, 0.5), 
+              id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), dL = 2)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, id = xdat$id, iter = 5e5, burn = 3e5, delta = 0.03)
+
+
+# GPCM, No regression, 2 dimensions
+xdat = hltsim(n = n, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = NULL)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), 
+          iter = 200, burn = 100, delta = 0.013)
+
+# GPCM, Regression, 2 dimensions
+xdat = hltsim(n = n, ntheta = 2, lambda = c(0.7, 0.7), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+              dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = z)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, z = z, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), 
+          iter = 200, burn = 100, delta = 0.013)
+
+# GPCM, No regression, 4 dimensions
+xdat = hltsim(n = n, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+                     3,3,3,3,3,3),
+              dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = NULL)
 apply(xdat$x, 2, table)
 mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
           3,3,3,3,3,3), iter = 200, burn = 100, delta = 0.013)
+
+# GPCM, Regression, 4 dimensions
+xdat = hltsim(n = n, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
+              tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+                     3,3,3,3,3,3),
+              dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+              regression = FALSE, z = z)
+apply(xdat$x, 2, table)
+mod = hlt(xdat$x, z = z, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+          3,3,3,3,3,3), iter = 200, burn = 100, delta = 0.013)
+
+
+
 
 }

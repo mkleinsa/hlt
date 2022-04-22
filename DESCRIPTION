@@ -11,7 +11,8 @@ Description: Higher-order latent trait theory (item response theory).
     done on the second-order latent trait.
 License: GPL (>= 2)
 Depends: R (>= 3.5.0)
-Imports: Rcpp (>= 1.0.8), RcppDist, RcppProgress, tidyr, ggplot2, truncnorm
+Imports: Rcpp (>= 1.0.8), RcppDist, RcppProgress, tidyr, ggplot2, truncnorm,
+    foreach
 Suggests: mvc
 LinkingTo: Rcpp, RcppDist, RcppProgress
 RoxygenNote: 7.1.2

@@ -18,14 +18,77 @@
 #' @export
 #' 
 #' @examples 
+#' # PCM, No regression, 2 dimensions, binary response
+#' xdat = hltsim(type = "1p", n = 50, ntheta = 2, lambda = c(0.5, 0.5), 
+#'               id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), dL = 2)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, id = xdat$id, iter = 5e5, burn = 3e5, type = "1p", 
+#'           delta = 0.1)
+#'           
+#' # PCM, No regression, 3 dimensions, binary response
+#' xdat = hltsim(type = "1p", n = 200, ntheta = 3, lambda = c(0.2, 0.2, 0.1), 
+#'               id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2), dL = 2)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, id = xdat$id, iter = 5e5, burn = 3e5, type = "1p", 
+#'           delta = 0.04)
+#' 
+#' # PCM, No regression, 2 dimensions
+#' xdat = hltsim(n = n, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = NULL)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), 
+#'           iter = 200, burn = 100, delta = 0.013)
 #' 
 #' # PCM, No regression, 4 dimensions
-#' xdat = hltsim(type = "1p", n = 250, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
-#'               id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
-#'                      3,3,3,3,3,3), dL = 2)
+#' type, n, ntheta, lambda, id, dL, nB, beta = NULL
+#' xdat = hltsim(type = "1p", n = 50, ntheta = 2, lambda = c(0.5, 0.5), 
+#'               id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), dL = 2)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, id = xdat$id, iter = 5e5, burn = 3e5, delta = 0.03)
+#' 
+#' 
+#' # GPCM, No regression, 2 dimensions
+#' xdat = hltsim(n = n, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = NULL)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), 
+#'           iter = 200, burn = 100, delta = 0.013)
+#' 
+#' # GPCM, Regression, 2 dimensions
+#' xdat = hltsim(n = n, ntheta = 2, lambda = c(0.7, 0.7), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1),
+#'               dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = z)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, z = z, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1), 
+#'           iter = 200, burn = 100, delta = 0.013)
+#' 
+#' # GPCM, No regression, 4 dimensions
+#' xdat = hltsim(n = n, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+#'                      3,3,3,3,3,3),
+#'               dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = NULL)
 #' apply(xdat$x, 2, table)
 #' mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
 #'           3,3,3,3,3,3), iter = 200, burn = 100, delta = 0.013)
+#' 
+#' # GPCM, Regression, 4 dimensions
+#' xdat = hltsim(n = n, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
+#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+#'                      3,3,3,3,3,3),
+#'               dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
+#'               regression = FALSE, z = z)
+#' apply(xdat$x, 2, table)
+#' mod = hlt(xdat$x, z = z, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+#'           3,3,3,3,3,3), iter = 200, burn = 100, delta = 0.013)
+#' 
+#' 
+#' 
 #' 
 hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   
@@ -46,14 +109,14 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   if(regression == TRUE) {
     z = matrix(sample(c(0, 1), size = n * nB, replace = TRUE), nrow = n, 
                ncol = nB)
-    theta[, nT] = theta[, nT] + z %*% s.beta + rnorm(n, 0, 0.1)
+    theta[, nT] = theta[, nT] + z %*% s.beta #+ rnorm(n, 0, 0.1)
   }
   
   for(i in 1:(nT - 1)) {
     theta[, i] = lambda[i] * theta[, nT] + rnorm(n, 0, 1)
   }
   
-  s.lam.cor = cor.theta(theta)
+  s.cor = cor(theta)
   
   J = length(id)
   
@@ -61,9 +124,9 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   
   s.theta = theta
   
-  s.alpha = rtruncnorm(J, a = 0, mean = 1, sd = 0.2)
+  s.alpha = rtruncnorm(J, a = 0, mean = 1, sd = 0.5)
   
-  s.delta = mapply(1:J, FUN = function(x) {sort(rnorm(dL, 1, 0.2))}, 
+  s.delta = mapply(1:J, FUN = function(x) {sort(rnorm(dL, 1, 0.5))}, 
                    SIMPLIFY = "matrix")
   
   s.delta[1, ] = rep(0, J)
@@ -83,24 +146,28 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   }
   
   if(regression == TRUE) {
-    return(list(x = x, 
+    ret = list(x = x, 
                 z = z,
                 id = id,
                 theta = theta,
                 namesx = paste0("x", 1:J),
                 s.beta = s.beta,
-                s.lam.cor = s.lam.cor,
-                s.alpha = s.alpha,
+                s.cor = s.cor,
                 s.delta = s.delta,
-                s.lambda = s.lambda))
+                s.lambda = s.lambda)
   } else {
-    return(list(x = x, 
+    ret = list(x = x, 
                 theta = theta,
                 id = id,
                 namesx = paste0("x", 1:J),
-                s.lam.cor = s.lam.cor,
-                s.alpha = s.alpha,
+                s.cor = s.cor,
                 s.delta = s.delta,
-                s.lambda = s.lambda))
+                s.lambda = s.lambda)
+  }
+  
+  if(type == "1p") {
+    return(ret)
+  } else {
+    return(c(ret, s.alpha = s.alpha))
   }
 }

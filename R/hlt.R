@@ -110,6 +110,7 @@
 #' mod = hlt(x, z = z, id = id, start = start, iter = 500, burn = 250, delta = 0.002)
 #' 
 #' @importFrom stats cor quantile rnorm runif sd
+#' @importFrom foreach foreach `%dopar%`
 #' @useDynLib hlt, .registration=TRUE
 #' @importFrom Rcpp evalCpp
 #' @export
@@ -120,9 +121,22 @@ hlt = function(x,
                burn = iter / 2, 
                delta,
                type = "2p",
-               start = list(lambda = c(), theta = c(), delta = c(), 
-                            alpha = c(), beta = c()),
+               start = list(
+                 list(lambda = c(), theta = c(), delta = c(), 
+                      alpha = c(), beta = c())
+                 ),
+               nchains = 1,
                progress = TRUE) {
+  
+    if(nchains > 1) {
+      models = foreach (i = 1:nchains, .verbose = TRUE) %dopar% {
+        hlt(x = x, z = x, id = id, iter = iter, burn = burn, delta = delta, 
+            type = type, progress = FALSE, nchains = 1, start = start[[i]])
+      }
+      names(models) = paste0("chain", 1:nchains)
+      class(models) = "hltObjList"
+      return(models)
+    }
   
     if(!is.matrix(x)) {
       x = as.matrix(x)
@@ -525,6 +539,10 @@ hlt = function(x,
     theta_mean_sq = theta_mean_sq[1, ] / (iter - burn)
     theta_sd = sqrt(theta_mean_sq - (theta_mean^2))
     
+    # for(i in ix[1]:ixe[1]) {
+    #   post[, i] = standardize_loadings(post[, i])
+    # }
+    
     colnames(x) = paste0("x", 1:J)
     
     accept.rate = mean(accept)
@@ -534,7 +552,10 @@ hlt = function(x,
     result = list(post = post, 
                   accept.rate = accept.rate, 
                   theta = theta,
-                  nT = nT)
+                  nT = nT,
+                  args = list(x = x, z = z, id = id, iter = iter, burn = burn, 
+                              delta = delta, type = type, start = start,
+                              progress = progress))
     
     class(result) = c("hltObj")
     return(result)
