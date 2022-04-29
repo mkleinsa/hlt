@@ -32,6 +32,42 @@ plot.hltObj = function(x, ...) {
   }
 }
 
+#' 
+#' @import ggplot2
+#' @exportS3Method plot hltObjList
+plot.hltObjList = function(x, ...) {
+  args = list(...)
+  
+  if("type" %in% names(args)) {
+    type = args$type
+  }
+  if("param" %in% names(args)) {
+    param = args$param
+  }
+  if("item" %in% names(args)) {
+    item = args$item
+  }
+  if("min" %in% names(args)) {
+    min = args$min
+  } else {
+    min = -4
+  }
+  if("max" %in% names(args)) {
+    max = args$max
+  } else {
+    max = 4
+  }
+  if(type == "trace") {
+    m = merge_chains(x)
+    post = m$post
+    nr = nrow(post)
+    post = cbind.data.frame(post, chain = rep(1:m$nchains, each = nrow(post) / m$nchains))
+    ggplot(data.frame(param = rep(1:(nr/m$nchains), m$nchains), y = post[, param], 
+                      each = post[, "chain"]), aes(param, y, group = each, color = each)) + 
+      geom_line() + xlab("iteration") + ylab("value") + get_theme()
+  }
+}
+
 get_theme = function() {
   theme_bw() + 
   theme(panel.grid.major = element_line(colour="#DDDDDD", size = (.5)),

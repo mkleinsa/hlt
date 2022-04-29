@@ -15,7 +15,8 @@ hlt(
   type = "2p",
   start = list(list(lambda = c(), theta = c(), delta = c(), alpha = c(), beta = c())),
   nchains = 1,
-  progress = TRUE
+  progress = TRUE,
+  verbose = FALSE
 )
 }
 \arguments{

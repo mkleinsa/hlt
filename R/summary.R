@@ -20,11 +20,25 @@ summary.hltObj = function(object, ...) {
     smry = apply(post, 2, smy, digits = digits)
   } else if (param == "lambda") {
     smry = apply(post[, grepl("lambda", nms), drop = FALSE], 2, smy, digits = digits)
-    cor_mat = matrix(data = NA, nrow = nrow(object$theta), ncol = nT)
-    for(i in 1:nT) {
-      cor_mat[, i] = summary.hltObj(object, param = "theta", dimension = i)[, 1]
+    
+    lambda = smry[1,]
+    nlambda = ncol(smry)
+    sdy = numeric(nlambda)
+    for(i in 1:nlambda) {
+      sdy[i] = sd(summary.hltObj(object, param = "theta", dimension = i)[, 1])
     }
-    smry = rbind(smry, std.mean = round(cor(cor_mat)[1:(nT - 1), nT], digits = digits))
+    sdx = sd(summary.hltObj(object, param = "theta", dimension = nlambda + 1)[, 1])
+    lambda_std = (lambda * sdx) / sdy
+    
+    # cor_mat = matrix(data = NA, nrow = nrow(object$theta), ncol = nT)
+    # for(i in 1:nT) {
+    #   cor_mat[, i] = summary.hltObj(object, param = "theta", dimension = i)[, 1]
+    # }
+    # smry = rbind(smry, std.mean = round(cor(cor_mat)[1:(nT - 1), nT], digits = digits))
+    
+    smry = rbind(smry, std.mean = round(lambda_std, digits = digits))
+    
+    
   } else if (param == "alpha") {
     smry = apply(post[, grepl("^[a]", nms), drop = FALSE], 2, smy, digits = digits)
   } else if (param == "delta") {

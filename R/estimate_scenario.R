@@ -1,4 +1,0 @@
-
-estimate_scenario = function() {
-  
-}

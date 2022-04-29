@@ -66,7 +66,8 @@ double lgp2PNR(IntegerMatrix & x,
 
   for(int l = 0; l < nT - 1; l++) {
     double lambdal = lambda(l);
-    llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
+    //llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
+    llk = llk + std::log(d_truncnorm(lambdal, 0.0, 0.25, -1, 1) + eps);
   }
 
   for(int j = 0; j < J; j++) {

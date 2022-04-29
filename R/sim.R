@@ -68,11 +68,11 @@
 #'           iter = 200, burn = 100, delta = 0.013)
 #' 
 #' # GPCM, No regression, 4 dimensions
-#' xdat = hltsim(n = n, ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
-#'               tJ = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
+#' GPCM, No regression, 4 dimensions
+#' xdat = hltsim(n = 75, type = "2p", ntheta = 4, lambda = c(0.7, 0.2, 1.2, 0.4), 
+#'               id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
 #'                      3,3,3,3,3,3),
-#'               dL = 10, mua = NULL, mud = 1.4, siga = NULL, sigd = 1,
-#'               regression = FALSE, z = NULL)
+#'               dL = 5)
 #' apply(xdat$x, 2, table)
 #' mod = hlt(xdat$x, id = c(0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2, 
 #'           3,3,3,3,3,3), iter = 200, burn = 100, delta = 0.013)
@@ -168,6 +168,8 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   if(type == "1p") {
     return(ret)
   } else {
-    return(c(ret, s.alpha = s.alpha))
+    ret = append(ret, list(s.alpha))
+    names(ret)[length(ret)] = "s.alpha"
+    return(ret)
   }
 }

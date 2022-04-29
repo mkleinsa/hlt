@@ -111,6 +111,7 @@
 #' 
 #' @importFrom stats cor quantile rnorm runif sd
 #' @importFrom foreach foreach `%dopar%`
+#' @importFrom doParallel registerDoParallel
 #' @useDynLib hlt, .registration=TRUE
 #' @importFrom Rcpp evalCpp
 #' @export
@@ -126,11 +127,13 @@ hlt = function(x,
                       alpha = c(), beta = c())
                  ),
                nchains = 1,
-               progress = TRUE) {
+               progress = TRUE,
+               verbose = FALSE) {
   
     if(nchains > 1) {
-      models = foreach (i = 1:nchains, .verbose = TRUE) %dopar% {
-        hlt(x = x, z = x, id = id, iter = iter, burn = burn, delta = delta, 
+      registerDoParallel(cores = nchains)
+      models = foreach (i = 1:nchains, .verbose = verbose) %dopar% {
+        hlt(x = x, z = z, id = id, iter = iter, burn = burn, delta = delta, 
             type = type, progress = FALSE, nchains = 1, start = start[[i]])
       }
       names(models) = paste0("chain", 1:nchains)

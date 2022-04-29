@@ -10,7 +10,6 @@ merge_chains = function (x, ...) {
 #' @exportS3Method merge_chains hltObjList
 merge_chains.hltObjList = function(x, ...) {
   if(missing(...)) {
-    x =  mod
     nchains = length(x)
     post = do.call(rbind, Map(f = function(y) {y$post}, x))
     nT = x[[1]]$nT
@@ -22,7 +21,8 @@ merge_chains.hltObjList = function(x, ...) {
     theta = data.frame(mean = rmeans, sd = rsts)
     result = list(post = post, 
                   theta = theta,
-                  nT = nT)
+                  nT = nT,
+                  nchains = nchains)
     class(result) = c("hltObj")
     return(result)
   } else {
