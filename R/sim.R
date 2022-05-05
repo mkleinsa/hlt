@@ -99,11 +99,8 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   }
   
   nT = ntheta + 1
-  
   theta = matrix(0, n, nT)
-  
   theta[, nT] = rnorm(n, 0, sqrt(1.5))# seq(-2, 2, length.out = n)
-  
   s.beta = beta
   
   if(regression == TRUE) {
@@ -118,32 +115,30 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   }
   
   s.cor = cor(theta)
-  
   J = length(id)
-  
   nD = dL - 1
-  
   s.theta = theta
-  
   s.alpha = rtruncnorm(J, a = 0, mean = 1, sd = 0.5)
   
   s.delta = mapply(1:J, FUN = function(x) {sort(rnorm(dL, 1, 0.5))}, 
                    SIMPLIFY = "matrix")
-  
   s.delta[1, ] = rep(0, J)
-  
   s.lambda = lambda
   
   x = matrix(0, n, J)
   for (i in 1:n) {
+    
     for (j in 1:J) {
+      
       if(type == "2p") {
         exp_part = exp(cumsum((s.alpha[j] * (s.theta[i, id[j] + 1])) - s.delta[, j]))
       } else if(type == "1p") {
         exp_part = exp(cumsum((s.theta[i, id[j] + 1]) - s.delta[, j]))
       }
+      
       x[i, j] = sample(1:(dL) - 1, size = 1, prob = exp_part / sum(exp_part))
     }
+    
   }
   
   if(regression == TRUE) {
@@ -173,4 +168,5 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
     names(ret)[length(ret)] = "s.alpha"
     return(ret)
   }
+  
 }

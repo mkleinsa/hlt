@@ -2,34 +2,43 @@
 #' @import ggplot2
 #' @exportS3Method plot hltObj
 plot.hltObj = function(x, ...) {
+  
   args = list(...)
+  
   if("type" %in% names(args)) {
     type = args$type
   }
+  
   if("param" %in% names(args)) {
     param = args$param
   }
+  
   if("item" %in% names(args)) {
     item = args$item
   }
+  
   if("min" %in% names(args)) {
     min = args$min
   } else {
     min = -4
   }
+  
   if("max" %in% names(args)) {
     max = args$max
   } else {
     max = 4
   }
+  
   post = x$post
   nr = nrow(post)
+  
   if(type == "trace") {
     ggplot(data.frame(param = 1:nr, y = post[, param]), aes(param, y)) + geom_line() + 
       xlab("iteration") + ylab("value") + get_theme()
   } else if(type == "icc") {
     plot.hltObj.icc(x, item = item, type = type, min = min, max = max)
   }
+  
 }
 
 #' 
@@ -41,22 +50,27 @@ plot.hltObjList = function(x, ...) {
   if("type" %in% names(args)) {
     type = args$type
   }
+  
   if("param" %in% names(args)) {
     param = args$param
   }
+  
   if("item" %in% names(args)) {
     item = args$item
   }
+  
   if("min" %in% names(args)) {
     min = args$min
   } else {
     min = -4
   }
+  
   if("max" %in% names(args)) {
     max = args$max
   } else {
     max = 4
   }
+  
   if(type == "trace") {
     m = merge_chains(x)
     post = m$post
@@ -66,6 +80,7 @@ plot.hltObjList = function(x, ...) {
                       each = post[, "chain"]), aes(param, y, group = each, color = each)) + 
       geom_line() + xlab("iteration") + ylab("value") + get_theme()
   }
+  
 }
 
 get_theme = function() {
@@ -89,21 +104,26 @@ plot.hltObj.icc = function(mod, item, type, min, max) {
   if(type == "icc") {
     plt = icc_curve(mod, item, min = min, max = max)
   }
+  
   return(plt)
 }
 
 #' @importFrom tidyr pivot_longer
 icc_curve = function(mod, x, min = -4, max = 4) {
+  
   if(any(grepl("^[a]", colnames(mod$post)))) {
     alpha = as.vector(summary(mod, param = "alpha", digits = 2, transpose = FALSE)["mean",])
   }
+  
   kappa = summary(mod, param = "delta", digits = 2, transpose = FALSE)["mean",]
   kappa_names = names(kappa)
   kappa_id = as.numeric(gsub(".*[d]([^.]+)[_].*", "\\1", kappa_names))
   kappa_list = vector(length = length(unique(kappa_id)), mode = "list")
+  
   for(i in 1:length(kappa_list)) {
     kappa_list[[i]] = kappa[kappa_id == i]
   }
+  
   pxk = function(theta) {
     #stat = "mean"
     return(as.numeric(sapply(theta, function(theta) {
@@ -112,15 +132,18 @@ icc_curve = function(mod, x, min = -4, max = 4) {
       cum_sum / (1 + par_cum_sum)
     })))
   }
+  
   if(length(kappa_list[[x]]) == 1) {
     pdata = data.frame(x = seq(min, max, by = 0.1), y = sapply(seq(min, max, by = 0.1), pxk))
   } else {
     pdata = data.frame(x = seq(min, max, by = 0.1), y = t(sapply(seq(min, max, by = 0.1), pxk)))
   }
+  
   kappa_nms = names(kappa_list[[x]])
   names(pdata) = c("x", kappa_nms)
   pdata = tidyr::pivot_longer(pdata, cols = kappa_nms)
   plt = ggplot(pdata, aes(x, value, color = name)) + get_theme() + 
     xlab("theta") + ylab("p") + geom_line()
+  
   return(plt)
 }

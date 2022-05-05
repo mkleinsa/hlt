@@ -1,21 +1,26 @@
 #' @exportS3Method summary hltObj
 summary.hltObj = function(object, ...) {
+  
   args = list(...)
   param = args$param
   dimension = args$dimension
   nT = object$nT
+  
   if("digits" %in% names(args)) {
     digits = args$digits
   } else {
     digits = 3
   }
+  
   if("transpose" %in% names(args)) {
     transpose = args$transpose
   } else {
     transpose = TRUE
   }
+  
   post = object$post
   nms = colnames(post)
+  
   if (param == "all") {
     smry = apply(post, 2, smy, digits = digits)
   } else if (param == "lambda") {
@@ -46,6 +51,7 @@ summary.hltObj = function(object, ...) {
   } else if (param == "beta") {
     smry = apply(post[, grepl("beta", nms), drop = FALSE], 2, smy, digits = digits)
   } else if (param == "theta") {
+    
     if("dimension" %in% names(args)) {
       dimension = args$dimension
       nT = object$nT
@@ -54,6 +60,7 @@ summary.hltObj = function(object, ...) {
               for the general latent dimension.")
       dimension = nT
     }
+    
     total_theta = nrow(object$theta)
     n_per_theta = total_theta / nT
     n_per_theta * dimension

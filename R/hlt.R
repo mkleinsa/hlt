@@ -132,6 +132,7 @@ hlt = function(x,
   
     if(nchains > 1) {
       registerDoParallel(cores = nchains)
+      
       if(length(start) < nchains) {
         models = foreach (i = 1:nchains, .verbose = verbose) %dopar% {
           hlt(x = x, z = z, id = id, iter = iter, burn = burn, delta = delta, 
@@ -143,6 +144,7 @@ hlt = function(x,
               type = type, progress = FALSE, nchains = 1, start = start[[i]])
         }
       }
+      
       names(models) = paste0("chain", 1:nchains)
       class(models) = "hltObjList"
       return(models)
@@ -178,6 +180,7 @@ hlt = function(x,
     isZ = !is.null(z)
     
     if(isZ) {
+      
       if(!is.matrix(z)) {
         z = as.matrix(z)
       }
@@ -250,17 +253,6 @@ hlt = function(x,
       
       if(type == "1p") {
         
-        npar = n*nT + (nT - 1) + nD*J
-        
-        post_names = c(paste0("lambda", 1:(nT - 1)),
-                       as.vector(sapply(1:nT, function(x) {paste0(paste0("theta", x, "_"), 1:n)})),  
-                       as.vector(sapply(1:J, function(x) {paste0(paste0("d", x, "_"), 1:nD)})))
-        
-        post = matrix(nrow = iter - burn, ncol = npar)
-        post[1, ] = start_val(x = start, type = type , isZ = isZ, n = n, nT = nT, 
-                              nD = nD, J = J, nB = nB)
-        
-        #----
         npar_theta = n*nT
         npar = (nT - 1) + nD*J
         npar_total = npar + npar_theta
@@ -327,8 +319,11 @@ hlt = function(x,
     accept[1] = 1
     
     if(isZ) {
+      
       if(type == "1p") {
+        
         if(ntheta == 2) {
+          
           lt1PR2D(x = x,
                   z = z,
                   iter = iter,
@@ -353,7 +348,9 @@ hlt = function(x,
                   accept = accept,
                   eps = .Machine$double.eps,
                   display_progress = progress)
+          
         } else {
+          
           lt1PR(x = x,
                 z = z,
                 iter = iter,
@@ -378,9 +375,13 @@ hlt = function(x,
                 accept = accept,
                 eps = .Machine$double.eps,
                 display_progress = progress)
+          
         }
+        
       } else if(type == "2p") {
+        
         if(ntheta == 2) {
+          
           lt2PR2D(x = x,
                   z = z,
                   iter = iter,
@@ -405,7 +406,9 @@ hlt = function(x,
                   accept = accept,
                   eps = .Machine$double.eps,
                   display_progress = progress)
+          
         } else {
+          
           lt2PR(x = x,
                 z = z,
                 iter = iter,
@@ -430,12 +433,18 @@ hlt = function(x,
                 accept = accept,
                 eps = .Machine$double.eps,
                 display_progress = progress)
+          
         }
+        
       }
+      
     } 
     else {
+      
       if(type == "1p") {
+        
         if(ntheta == 2) {
+          
           lt1PNR2D(x = x,
                    iter = iter,
                    burn = burn,
@@ -458,7 +467,9 @@ hlt = function(x,
                    accept = accept,
                    eps = .Machine$double.eps,
                    display_progress = progress)
+          
         } else {
+          
           lt1PNR(x = x,
                  iter = iter,
                  burn = burn,
@@ -481,8 +492,10 @@ hlt = function(x,
                  accept = accept,
                  eps = .Machine$double.eps,
                  display_progress = progress)
+          
         }
       } else if(type == "2p") {
+        
         if(ntheta == 2) {
           lt2PNR2D(x = x,
                    iter = iter,
@@ -506,7 +519,9 @@ hlt = function(x,
                    accept = accept,
                    eps = .Machine$double.eps,
                    display_progress = progress)
+          
         } else {
+          
           lt2PNR(x = x,
                  iter = iter,
                  burn = burn,
@@ -529,6 +544,7 @@ hlt = function(x,
                  accept = accept,
                  eps = .Machine$double.eps,
                  display_progress = progress)
+          
         }
       }
     }
@@ -539,6 +555,7 @@ hlt = function(x,
     d_null = d_end[d_00 > 0] + ix[2]
     d_null_start = d_null - d_00[d_00 > 0]
     d_null = d_null - 1
+    
     if(length(d_null) > 0) {
       for(j in 1:length(d_null)) {
         post[, d_null_start[j]:d_null[j]] <- 0
@@ -549,14 +566,8 @@ hlt = function(x,
     theta_mean_sq = theta_mean_sq[1, ] / (iter - burn)
     theta_sd = sqrt(theta_mean_sq - (theta_mean^2))
     
-    # for(i in ix[1]:ixe[1]) {
-    #   post[, i] = standardize_loadings(post[, i])
-    # }
-    
     colnames(x) = paste0("x", 1:J)
-    
     accept.rate = mean(accept)
-    
     theta = data.frame(mean = theta_mean, sd = theta_sd)
     
     result = list(post = post, 
