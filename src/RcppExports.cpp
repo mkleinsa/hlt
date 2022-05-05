@@ -21,30 +21,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// correlation
-double correlation(NumericVector x, NumericVector y);
-RcppExport SEXP _hlt_correlation(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(correlation(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
-// covariance
-double covariance(NumericVector x, NumericVector y);
-RcppExport SEXP _hlt_covariance(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(covariance(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
 // lgp1PNR
 double lgp1PNR(IntegerMatrix& x, NumericVector lambda, int nT, int n, int J, NumericVector tJ, int nDmax, NumericVector lJ, NumericVector theta, NumericVector d, double eps);
 RcppExport SEXP _hlt_lgp1PNR(SEXP xSEXP, SEXP lambdaSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP JSEXP, SEXP tJSEXP, SEXP nDmaxSEXP, SEXP lJSEXP, SEXP thetaSEXP, SEXP dSEXP, SEXP epsSEXP) {
@@ -493,26 +469,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// standardize_lambda
-void standardize_lambda(Rcpp::NumericMatrix& post, int start_idx, int end_idx, int nT, int n, Rcpp::NumericMatrix& corr_theta);
-RcppExport SEXP _hlt_standardize_lambda(SEXP postSEXP, SEXP start_idxSEXP, SEXP end_idxSEXP, SEXP nTSEXP, SEXP nSEXP, SEXP corr_thetaSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type post(postSEXP);
-    Rcpp::traits::input_parameter< int >::type start_idx(start_idxSEXP);
-    Rcpp::traits::input_parameter< int >::type end_idx(end_idxSEXP);
-    Rcpp::traits::input_parameter< int >::type nT(nTSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type corr_theta(corr_thetaSEXP);
-    standardize_lambda(post, start_idx, end_idx, nT, n, corr_theta);
-    return R_NilValue;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_hlt_abs2", (DL_FUNC) &_hlt_abs2, 1},
-    {"_hlt_correlation", (DL_FUNC) &_hlt_correlation, 2},
-    {"_hlt_covariance", (DL_FUNC) &_hlt_covariance, 2},
     {"_hlt_lgp1PNR", (DL_FUNC) &_hlt_lgp1PNR, 11},
     {"_hlt_lt1PNR", (DL_FUNC) &_hlt_lt1PNR, 22},
     {"_hlt_lgp1PNR2D", (DL_FUNC) &_hlt_lgp1PNR2D, 11},
@@ -529,7 +488,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_hlt_lt2PR", (DL_FUNC) &_hlt_lt2PR, 24},
     {"_hlt_lgp2PR2D", (DL_FUNC) &_hlt_lgp2PR2D, 15},
     {"_hlt_lt2PR2D", (DL_FUNC) &_hlt_lt2PR2D, 24},
-    {"_hlt_standardize_lambda", (DL_FUNC) &_hlt_standardize_lambda, 6},
     {NULL, NULL, 0}
 };
 

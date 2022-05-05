@@ -102,18 +102,19 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   
   theta = matrix(0, n, nT)
   
-  theta[, nT] = seq(-3, 3, length.out = n)
+  theta[, nT] = rnorm(n, 0, sqrt(1.5))# seq(-2, 2, length.out = n)
   
   s.beta = beta
   
   if(regression == TRUE) {
     z = matrix(sample(c(0, 1), size = n * nB, replace = TRUE), nrow = n, 
                ncol = nB)
-    theta[, nT] = theta[, nT] + z %*% s.beta #+ rnorm(n, 0, 0.1)
+    theta[, nT] = theta[, nT] + z %*% s.beta + rnorm(n, 0, 0.6)
   }
   
   for(i in 1:(nT - 1)) {
-    theta[, i] = lambda[i] * theta[, nT] + rnorm(n, 0, 1)
+    theta[, i] = lambda[i] * theta[, nT] + rnorm(n, 0, sqrt(1.5))
+    #theta[, i] = theta[, i] / sqrt(1.5)
   }
   
   s.cor = cor(theta)

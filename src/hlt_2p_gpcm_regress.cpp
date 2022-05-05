@@ -7,7 +7,6 @@ using namespace Rcpp;
 #include <progress.hpp>
 #include <progress_bar.hpp>
 #include "abs2.h"
-#include "standardize_lambda.h"
 
 // [[Rcpp::export]]
 double lgp2PR(IntegerMatrix & x,
@@ -38,7 +37,7 @@ double lgp2PR(IntegerMatrix & x,
       if(i <= lJ(j)) {
         d2(i, j) = dne(i - 1, j);
         double dt = d2(i, j);
-        llk = llk + std::log(R::dnorm(dt, 0.0, 10.0, false) + eps);
+        llk = llk + std::log(R::dnorm(dt, 0.0, 2.0, false) + eps);
       }
     }
   }
@@ -75,12 +74,13 @@ double lgp2PR(IntegerMatrix & x,
 
   for(int l = 0; l < nT - 1; l++) {
     double lambdal = lambda(l);
-    llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
+    //llk = llk + std::log(R::dnorm(lambdal, 0.0, 1.0, false) + eps);
+    llk = llk + std::log(d_truncnorm(lambdal, 0.0, 10.0, -10, 10) + eps);
   }
 
   for(int j = 0; j < J; j++) {
     double at = a(j);
-    llk = llk + std::log(d_truncnorm(at, 0.0, 10.0, 0.0, 1000.0) + eps);
+    llk = llk + std::log(d_truncnorm(at, 0.0, 2.0, 0.0, 10.0) + eps);
   }
   
   for(int zz = 0; zz < nB; zz++) {

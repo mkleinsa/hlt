@@ -2,6 +2,8 @@
 
 S3method(merge_chains,hltObjList)
 S3method(plot,hltObj)
+S3method(plot,hltObjList)
+S3method(print,hltObj)
 S3method(summary,hltObj)
 export(hlt)
 export(hltsim)

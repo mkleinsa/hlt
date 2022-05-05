@@ -22,10 +22,9 @@ merge_chains.hltObjList = function(x, ...) {
     result = list(post = post, 
                   theta = theta,
                   nT = nT,
-                  nchains = nchains)
+                  nchains = nchains,
+                  merged = TRUE)
     class(result) = c("hltObj")
     return(result)
-  } else {
-    
   }
 }

@@ -5,14 +5,6 @@ abs2 <- function(x) {
     .Call(`_hlt_abs2`, x)
 }
 
-correlation <- function(x, y) {
-    .Call(`_hlt_correlation`, x, y)
-}
-
-covariance <- function(x, y) {
-    .Call(`_hlt_covariance`, x, y)
-}
-
 lgp1PNR <- function(x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, eps) {
     .Call(`_hlt_lgp1PNR`, x, lambda, nT, n, J, tJ, nDmax, lJ, theta, d, eps)
 }
@@ -75,9 +67,5 @@ lgp2PR2D <- function(x, z, lambda, nB, nT, n, J, tJ, nDmax, lJ, theta, d, a, bet
 
 lt2PR2D <- function(x, z, iter, burn, delta, post, mean_theta, mean_theta_sq, draw, draw_theta, ix, ixe, npar, ntheta, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress = TRUE) {
     .Call(`_hlt_lt2PR2D`, x, z, iter, burn, delta, post, mean_theta, mean_theta_sq, draw, draw_theta, ix, ixe, npar, ntheta, n, nB, J, nDmax, lJ, nT, tJ, accept, eps, display_progress)
-}
-
-standardize_lambda <- function(post, start_idx, end_idx, nT, n, corr_theta) {
-    invisible(.Call(`_hlt_standardize_lambda`, post, start_idx, end_idx, nT, n, corr_theta))
 }
 

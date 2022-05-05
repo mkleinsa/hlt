@@ -132,9 +132,16 @@ hlt = function(x,
   
     if(nchains > 1) {
       registerDoParallel(cores = nchains)
-      models = foreach (i = 1:nchains, .verbose = verbose) %dopar% {
-        hlt(x = x, z = z, id = id, iter = iter, burn = burn, delta = delta, 
-            type = type, progress = FALSE, nchains = 1, start = start[[i]])
+      if(length(start) < nchains) {
+        models = foreach (i = 1:nchains, .verbose = verbose) %dopar% {
+          hlt(x = x, z = z, id = id, iter = iter, burn = burn, delta = delta, 
+              type = type, progress = FALSE, nchains = 1)
+        }
+      } else {
+        models = foreach (i = 1:nchains, .verbose = verbose) %dopar% {
+          hlt(x = x, z = z, id = id, iter = iter, burn = burn, delta = delta, 
+              type = type, progress = FALSE, nchains = 1, start = start[[i]])
+        }
       }
       names(models) = paste0("chain", 1:nchains)
       class(models) = "hltObjList"
