@@ -11,7 +11,7 @@ get_hlt_start = function(x, nchains = 1) {
     return(start = start_list)
   }
   
-  post = tail(hlfit$post, 1)
+  post = tail(x$post, 1)
   isRegress = !is.null(x$args$z)
   is1p = x$args$type == "1p"
   nitem = ncol(x$args$x)
@@ -26,13 +26,13 @@ get_hlt_start = function(x, nchains = 1) {
     
     if(is1p) {
       start = list(lambda = post[1, paste0("lambda", 1:(nT - 1))],
-                   theta = hlfit$theta[,1],
+                   theta = x$theta[,1],
                    delta = post[1, grepl("^[d]", colnames(post))],
                    alpha = c(),
                    beta = post[1, paste0("beta", 1:nZ)])
     } else {
       start = list(lambda = post[1, paste0("lambda", 1:(nT - 1))],
-                   theta = hlfit$theta[,1],
+                   theta = x$theta[,1],
                    delta = post[1, grepl("^[d]", colnames(post))],
                    alpha = post[1, paste0("a", 1:nitem)],
                    beta = post[1, paste0("beta", 1:nZ)])
@@ -42,13 +42,13 @@ get_hlt_start = function(x, nchains = 1) {
     
     if(is1p) {
       start = list(lambda = post[1, paste0("lambda", 1:(nT - 1))],
-                   theta = hlfit$theta[,1],
+                   theta = x$theta[,1],
                    delta = post[1, grepl("^[d]", colnames(post))],
                    alpha = c(),
                    beta = c())
     } else {
       start = list(lambda = post[1, paste0("lambda", 1:(nT - 1))],
-                   theta = hlfit$theta[,1],
+                   theta = x$theta[,1],
                    delta = post[1, grepl("^[d]", colnames(post))],
                    alpha = post[1, paste0("a", 1:nitem)],
                    beta = c())
