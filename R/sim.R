@@ -106,7 +106,7 @@ hltsim = function(type, n, ntheta, lambda, id, dL, nB, beta = NULL) {
   if(regression == TRUE) {
     z = matrix(sample(c(0, 1), size = n * nB, replace = TRUE), nrow = n, 
                ncol = nB)
-    theta[, nT] = theta[, nT] + z %*% s.beta + rnorm(n, 0, 0.6)
+    theta[, nT] = theta[, nT] + z %*% s.beta #+ rnorm(n, 0, sqrt(1.5))
   }
   
   for(i in 1:(nT - 1)) {

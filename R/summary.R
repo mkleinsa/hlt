@@ -42,8 +42,6 @@ summary.hltObj = function(object, ...) {
     # smry = rbind(smry, std.mean = round(cor(cor_mat)[1:(nT - 1), nT], digits = digits))
     
     #smry = rbind(smry, std.mean = round(lambda_std, digits = digits))
-    
-    
   } else if (param == "alpha") {
     smry = apply(post[, grepl("^[a]", nms), drop = FALSE], 2, smy, digits = digits)
   } else if (param == "delta") {
@@ -65,6 +63,16 @@ summary.hltObj = function(object, ...) {
     n_per_theta = total_theta / nT
     n_per_theta * dimension
     smry = t(object$theta[((n_per_theta * (dimension - 1)) + 1):(n_per_theta * dimension), ])
+  } else if (param == "correlation") {
+    nT = object$nT
+    corr = matrix(0, nrow = nrow(object$theta), ncol = nT)
+    
+    for(i in 1:nT) {
+      corr[, i] = summary(object, param = "theta", dimension = i)
+    }
+    
+    smry = round(cor(corr), digits = digits)
+    colnames(smry) = rownames(smry) = paste0("theta", 1:nT)
   }
   
   if(transpose == FALSE) {

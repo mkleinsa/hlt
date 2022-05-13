@@ -5,9 +5,10 @@ print.hltObj = function(x, ...) {
   param = args$param
   dimension = args$dimension
   
-  cat('Higher-order item response theory model with ', x$nT, ' first-order domains', '\n', sep = '')
+  cat('Higher-order item response theory model with ', x$nT - 1, ' first-order domains', '\n', sep = '')
   cat(' Total number of parameters: ', ncol(x$post) + nrow(x$theta), '\n', sep = '')
-  cat('Merged run of ', x$nchains, ' parallel chains \n', sep = '')
+  
+  
   
   if(!('merged' %in% names(x))) {
     cat(' Model type (1p = "Partial Credit model"; 2p = "Generalized Partial Credit Model"): ', x$args$type, '\n', sep = '')
@@ -16,6 +17,7 @@ print.hltObj = function(x, ...) {
     cat(' Acceptance rate: ', round(x$accept.rate, digits = 3), '\n', sep = '')
     cat('\n')
   } else {
+    cat('Merged run of ', x$nchains, ' parallel chains \n', sep = '')
     cat('\n')
   }
   

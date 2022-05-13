@@ -174,6 +174,7 @@ double lt2PR(IntegerMatrix & x,
       oldpars_theta = newpars_theta;
       if(it >= burn) {
         post(it - burn, _ ) = newpars;
+        //llikelihood(it - burn) = get_llike(newpars, newpars_theta);
         mean_theta = mean_theta + newpars_theta;
         mean_theta_sq = mean_theta_sq + (newpars_theta * newpars_theta);
       }

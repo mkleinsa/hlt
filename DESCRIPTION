@@ -10,7 +10,7 @@ Description: Higher-order latent trait theory (item response theory).
     model with a second-order latent trait structure. Latent regression can be 
     done on the second-order latent trait.
 License: GPL (>= 2)
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.5.0), Rcpp (>= 0.12.0)
 Imports: Rcpp (>= 1.0.8), RcppDist, RcppProgress, tidyr, ggplot2, truncnorm,
     foreach, doParallel
 Suggests: mvc
