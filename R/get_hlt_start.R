@@ -1,4 +1,5 @@
 
+#' @export
 get_hlt_start = function(x, nchains = 1) {
   
   if(nchains > 1) {

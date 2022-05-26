@@ -1,0 +1,8 @@
+\documentclass{article}
+\usepackage{pdfpages}
+%\VignetteIndexEntry{hlt-paper}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\includepdf[pages=-, fitpaper=true]{kleinsasser_LatentRegressionHO_IRTrPackage_hlt_preprint.pdf}
+\end{document}
