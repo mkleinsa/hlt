@@ -1,8 +1,8 @@
 # R package: hlt <img src="man/figures/logo.png" align="right" width="120" />
 
-### Higher-Order Item Response Theory (Latent Trait Theory) with Regression
+### Latent Regression in Higher-Order Item Response Theory with the R Package hlt
 
-Higher-order latent trait theory (item response theory). We implement the generalized partial credit model with a second-order latent trait structure. Latent regression can be done on the second-order latent trait.
+Item response theory (IRT) has become a standard method in the analysis of survey assessment data. In the IRT paradigm, the performance of test takers (i.e., their capacity to answer a question correctly) is explained by individual ability and the properties or characteristics of the test. Classically, ability is assumed to be 1) univariate and 2) homogenous across person characteristics. First, ability, which is a placement of each test taker on a continuum, can often be explained by heterogeneity among study participants. Second, recent applications involve characterizing a general, higher-order, ability which explain multiple, first-order, domains of ability. The natural progression, then, is to explain the heterogeneity of general ability. The open-source R package hlt implements the random-walk Metropolis-Hastings algorithm to estimate the higher-order IRT model by implementing a flexible Bayesian framework. We implement a higher-order generalize partial credit model and its extension of latent regression with the goal of explaining the relationship between the general latent construct and a set of explanatory variables.
 
 ---
 
